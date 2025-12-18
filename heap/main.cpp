@@ -7,9 +7,10 @@
 #include <algorithm>
 
 #include "heap.hpp"
+#include "vector/vector.hpp"
 
 int main(/*int argc, char* argv[]*/) {
-    std::vector<int> vec;
+    Vector<int> vec;
 
     // std::mt19937 gen(std::random_device{}());
     // std::uniform_int_distribution<int> dist(1, 1000);

@@ -4,6 +4,7 @@
 #include <utility>
 #include <stdexcept>
 #include <cmath>
+#include <iterator>
 
 #define HEAP_TEMPLATE template <typename T, typename compare, std::size_t branches> requires (branches >= 2)
 #define TEMPLATED_HEAP Heap<T, compare, branches>
@@ -18,22 +19,25 @@ TEMPLATED_HEAP::Heap(std::size_t initial_capacity) : data_{} {
 
 HEAP_TEMPLATE
 template <typename InputIt>
-TEMPLATED_HEAP::Heap(InputIt first, InputIt last) : data_(first, last) {
+TEMPLATED_HEAP::Heap(InputIt first, InputIt last) : data_{} {
+    for (auto it = first; it != last; ++it) data_.push_back(*it);
     build_heap();
 }
 
 HEAP_TEMPLATE
-TEMPLATED_HEAP::Heap(std::initializer_list<T> list) : data_{list} {
+TEMPLATED_HEAP::Heap(std::initializer_list<T> list) : data_{} {
+    data_.reserve(list.size());
+    for (const auto& v : list) data_.push_back(v);
     build_heap();
 }
 
 HEAP_TEMPLATE
-TEMPLATED_HEAP::Heap(const std::vector<T>& vec) : data_{vec} {
+TEMPLATED_HEAP::Heap(const Vector<T>& vec) : data_{vec} {
     build_heap();
 }
 
 HEAP_TEMPLATE
-TEMPLATED_HEAP::Heap(std::vector<T>&& vec) : data_{std::move(vec)} {
+TEMPLATED_HEAP::Heap(Vector<T>&& vec) : data_{std::move(vec)} {
     build_heap();
 }
 
@@ -111,8 +115,8 @@ void TEMPLATED_HEAP::insert(std::initializer_list<T> list) {
 }
 
 HEAP_TEMPLATE
-void TEMPLATED_HEAP::insert(const std::vector<T>& list) {
-    for (const T& elem: list) push(elem);
+void TEMPLATED_HEAP::insert(const Vector<T>& list) {
+    for (const auto& elem: list) push(elem);
 }
 
 HEAP_TEMPLATE
@@ -170,10 +174,11 @@ TEMPLATED_HEAP::const_reverse_iterator TEMPLATED_HEAP::crend() const {
 }
 
 HEAP_TEMPLATE
-void TEMPLATED_HEAP::sort(std::vector<T>& vec) {
+void TEMPLATED_HEAP::sort(Vector<T>& vec) {
     Heap<T> heap(std::move(vec));
+    vec.clear();
     vec.reserve(heap.size());
-    while (!heap.empty()) vec.push_back(heap.pop()); 
+    while (!heap.empty()) vec.push_back(heap.pop());
 }
 
 HEAP_TEMPLATE

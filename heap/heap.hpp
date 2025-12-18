@@ -2,7 +2,6 @@
 
 #include <cstddef>
 #include <cmath>
-#include <vector>
 #include <iosfwd>
 #include <sstream>
 #include <format>
@@ -12,16 +11,18 @@
 #include <iomanip>
 #include <string>
 
+#include "vector/vector.hpp"
+
 template <typename T, 
           typename compare = std::less<T>, 
           std::size_t branches = 2>
 requires (branches >= 2)
 class Heap {
 public:
-    using iterator = std::vector<T>::iterator;
-    using const_iterator = std::vector<T>::const_iterator;
-    using reverse_iterator = std::vector<T>::reverse_iterator;
-    using const_reverse_iterator = std::vector<T>::const_reverse_iterator;
+    using iterator = typename Vector<T>::iterator;
+    using const_iterator = typename Vector<T>::const_iterator;
+    using reverse_iterator = typename Vector<T>::reverse_iterator;
+    using const_reverse_iterator = typename Vector<T>::const_reverse_iterator;
 
     Heap();
     Heap(std::size_t initial_capacity);
@@ -29,8 +30,8 @@ public:
     template <typename InputIt>
     Heap(InputIt first, InputIt last);
     Heap(std::initializer_list<T> list);
-    Heap(const std::vector<T>& vec);
-    Heap(std::vector<T>&& vec);
+    Heap(const Vector<T>& vec);
+    Heap(Vector<T>&& vec);
 
     Heap(const Heap& other);
     Heap(Heap&& other);
@@ -54,7 +55,7 @@ public:
     T& emplace(Args&&... args);
 
     void insert(std::initializer_list<T> list);
-    void insert(const std::vector<T>& vec);
+    void insert(const Vector<T>& vec);
 
     const T& top() const;
     const T pop();
@@ -71,7 +72,7 @@ public:
     reverse_iterator rend();
     const_reverse_iterator crend() const;
 
-    static void sort(std::vector<T>& vec);
+    static void sort(Vector<T>& vec);
 
     void format_helper(std::vector<std::string>& ss, std::size_t pos, std::size_t height) const {
         std::ostringstream os;
@@ -117,7 +118,7 @@ public:
         // return os;
     }
 private:
-    std::vector<T> data_;
+    Vector<T> data_;
 
     void heapify(std::size_t pos);
     void fix(std::size_t pos);

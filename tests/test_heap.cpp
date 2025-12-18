@@ -1,6 +1,7 @@
 #include "test.hpp"
 
 #include "heap/heap.hpp"
+#include "vector/vector.hpp"
 
 #include <algorithm>
 #include <random>
@@ -20,14 +21,19 @@ TEST_CASE("Heap: push/top/pop maintains order") {
 }
 
 TEST_CASE("Heap: heap sort matches std::sort") {
-  std::vector<int> xs;
+  Vector<int> xs;
+  std::vector<int> ys;
   std::mt19937 rng(123);
   std::uniform_int_distribution<int> dist(-1000, 1000);
-  for (int i = 0; i < 2000; ++i) xs.push_back(dist(rng));
+  for (int i = 0; i < 2000; ++i) {
+    const int v = dist(rng);
+    xs.push_back(v);
+    ys.push_back(v);
+  }
 
-  auto ys = xs;
   std::sort(ys.begin(), ys.end());
 
   Heap<int>::sort(xs);
-  CHECK(xs == ys);
+  CHECK_EQ(xs.size(), ys.size());
+  for (std::size_t i = 0; i < ys.size(); ++i) CHECK_EQ(xs[i], ys[i]);
 }
