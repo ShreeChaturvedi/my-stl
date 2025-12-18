@@ -40,6 +40,7 @@ add_executable(stl_tests
   tests/test_stack.cpp
   tests/test_priority_queue.cpp
   tests/test_list.cpp
+  tests/test_queue.cpp
 )
 target_link_libraries(stl_tests PRIVATE stl)
 add_test(NAME stl_tests COMMAND stl_tests)

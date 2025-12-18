@@ -38,6 +38,8 @@
 !priority-queue/**
 !list/
 !list/**
+!queue/
+!queue/**
 
 # Build artifacts
 build*/
