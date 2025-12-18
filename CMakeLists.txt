@@ -44,6 +44,7 @@ add_executable(stl_tests
   tests/test_span.cpp
   tests/test_map_set.cpp
   tests/test_unordered_set.cpp
+  tests/test_unordered_multi.cpp
 )
 target_link_libraries(stl_tests PRIVATE stl)
 add_test(NAME stl_tests COMMAND stl_tests)

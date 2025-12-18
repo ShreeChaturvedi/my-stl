@@ -5,18 +5,18 @@
 #include <utility>
 
 #include "utility/unit.hpp"
-#include "unordered-map/unordered_map.hpp"
+#include "unordered-multimap/unordered_multimap.hpp"
 
 template <typename K, typename Hash = std::hash<K>, typename KeyEqual = std::equal_to<K>>
-class unordered_set {
+class unordered_multiset {
 public:
   using key_type = K;
   using value_type = K;
   using size_type = std::size_t;
 
 private:
-  using map_type = unordered_map<K, unit, Hash, KeyEqual>;
-  map_type map_{};
+  using mmap_type = unordered_multimap<K, unit, Hash, KeyEqual>;
+  mmap_type map_{};
 
   template <typename It>
   class base_iterator {
@@ -52,11 +52,11 @@ private:
   };
 
 public:
-  using iterator = base_iterator<typename map_type::iterator>;
-  using const_iterator = base_iterator<typename map_type::const_iterator>;
+  using iterator = base_iterator<typename mmap_type::iterator>;
+  using const_iterator = base_iterator<typename mmap_type::const_iterator>;
 
-  unordered_set() = default;
-  explicit unordered_set(size_type bucket_count) : map_(bucket_count) {}
+  unordered_multiset() = default;
+  explicit unordered_multiset(size_type bucket_count) : map_(bucket_count) {}
 
   bool empty() const noexcept { return map_.empty(); }
   size_type size() const noexcept { return map_.size(); }
@@ -71,20 +71,12 @@ public:
   void clear() noexcept { map_.clear(); }
   void reserve(size_type n) { map_.reserve(n); }
 
-  iterator find(const K& key) { return iterator(map_.find(key)); }
-  const_iterator find(const K& key) const { return const_iterator(map_.find(key)); }
-  bool contains(const K& key) const { return map_.find(key) != map_.cend(); }
+  size_type count(const K& key) const { return map_.count(key); }
 
-  std::pair<iterator, bool> insert(const K& key) {
-    auto existing = map_.find(key);
-    if (existing != map_.end()) return {iterator(existing), false};
+  iterator insert(const K& key) {
     map_.insert({key, unit{}});
-    return {iterator(map_.find(key)), true};
+    return iterator(map_.find(key));
   }
 
-  bool erase(const K& key) {
-    const auto before = map_.size();
-    map_.erase(key);
-    return map_.size() != before;
-  }
+  size_type erase(const K& key) { return map_.erase(key); }
 };

@@ -42,6 +42,8 @@
 !queue/**
 !span/
 !span/**
+!utility/
+!utility/**
 !rb-tree/
 !rb-tree/**
 !map/
@@ -50,6 +52,10 @@
 !set/**
 !unordered-set/
 !unordered-set/**
+!unordered-multimap/
+!unordered-multimap/**
+!unordered-multiset/
+!unordered-multiset/**
 
 # Build artifacts
 build*/
