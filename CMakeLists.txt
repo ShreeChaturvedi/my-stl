@@ -29,6 +29,7 @@ add_executable(stl_tests
   tests/test_main.cpp
   tests/test_array_list.cpp
   tests/test_linked_list.cpp
+  tests/test_forward_list.cpp
   tests/test_ring_buffer.cpp
   tests/test_heap.cpp
   tests/test_unique_ptr.cpp
