@@ -185,7 +185,7 @@ T& Vector<T>::emplace_back(Args&&... args) {
 template <typename T>
 void Vector<T>::ensure_capacity_for_one_more() {
   if (size_ < capacity_) return;
-  const std::size_t next = capacity_ == 0 ? 1 : (capacity_ + (capacity_ >> 1));
+  const std::size_t next = capacity_ == 0 ? 1 : (capacity_ == 1 ? 2 : (capacity_ + (capacity_ >> 1)));
   reserve(next);
 }
 
