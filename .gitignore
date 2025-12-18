@@ -48,6 +48,8 @@
 !map/**
 !set/
 !set/**
+!unordered-set/
+!unordered-set/**
 
 # Build artifacts
 build*/
