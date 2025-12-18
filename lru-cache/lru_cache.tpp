@@ -1,7 +1,3 @@
-// Intentionally header-only (included from lru_cache.hpp).
-
-#include "lru_cache.hpp"
-
 template <typename K, typename V>
 LRUCache<K, V>::LRUCache(std::size_t capacity) : 
     capacity_(capacity), queue_{}, data_{} {}
@@ -11,14 +7,14 @@ bool LRUCache<K, V>::insert(const K& key, const V& value) {
     if (capacity_ == 0) return false;
     auto it = data_.find(key);
     if (it != data_.end()) {
-        auto& context = it->second;
-        context.first = value;
-        queue_.splice(queue_.begin(), queue_, context.second);
+        auto& entry = it->second;
+        entry.value = value;
+        queue_.move_to_front(entry.it);
         return false;
     }
     ensure_capacity();
-    queue_.push_front(key);
-    data_.emplace(key, std::make_pair(value, queue_.begin()));
+    auto node_it = queue_.push_front(key);
+    data_.insert({key, Entry{value, node_it}});
     return true;
 }
 
@@ -27,11 +23,9 @@ std::optional<std::reference_wrapper<const V>> LRUCache<K, V>::get(const K& key)
     if (capacity_ == 0) return std::nullopt;
     auto it = data_.find(key);
     if (it == data_.end()) return std::nullopt;
-    auto& context = it->second;
-    queue_.erase(context.second);
-    queue_.push_front(key);
-    context.second = queue_.begin();
-    return context.first;
+    auto& entry = it->second;
+    queue_.move_to_front(entry.it);
+    return entry.value;
 }
 
 template <typename K, typename V>
@@ -43,6 +37,7 @@ template <typename K, typename V>
 void LRUCache<K, V>::ensure_capacity() {
     if (capacity_ == 0) return;
     if (data_.size() < capacity_) return;
-    data_.erase(queue_.back());
+    const K evict_key = queue_.back();
+    data_.erase(evict_key);
     queue_.pop_back();
 }

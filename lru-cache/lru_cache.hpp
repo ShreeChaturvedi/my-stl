@@ -2,10 +2,11 @@
 
 #include <cstddef>
 #include <functional>
-#include <list>
 #include <optional>
-#include <unordered_map>
 #include <utility>
+
+#include "list/list.hpp"
+#include "unordered-map/unordered_map.hpp"
 
 template <typename K, typename V>
 class LRUCache {
@@ -17,9 +18,14 @@ public:
 private:
     void ensure_capacity();
 
+    struct Entry {
+        V value;
+        typename List<K>::iterator it;
+    };
+
     std::size_t capacity_;
-    std::list<K> queue_;
-    std::unordered_map<K, std::pair<V, typename std::list<K>::iterator>> data_;
+    List<K> queue_;
+    unordered_map<K, Entry> data_;
 };
 
 #include "lru_cache.tpp"
