@@ -66,6 +66,8 @@
 !flat-set/**
 !small-vector/
 !small-vector/**
+!stable-vector/
+!stable-vector/**
 
 # Build artifacts
 build*/

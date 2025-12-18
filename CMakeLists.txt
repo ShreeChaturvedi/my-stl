@@ -50,6 +50,7 @@ add_executable(stl_tests
   tests/test_flat_map.cpp
   tests/test_flat_set.cpp
   tests/test_small_vector.cpp
+  tests/test_stable_vector.cpp
 )
 target_link_libraries(stl_tests PRIVATE stl)
 add_test(NAME stl_tests COMMAND stl_tests)
@@ -61,6 +62,7 @@ add_executable(stl_bench
   bench/bench_flat_map.cpp
   bench/bench_flat_set.cpp
   bench/bench_small_vector.cpp
+  bench/bench_stable_vector.cpp
 )
 target_link_libraries(stl_bench PRIVATE stl)
 target_compile_options(stl_bench PRIVATE -O3)
