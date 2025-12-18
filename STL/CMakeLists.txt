@@ -26,6 +26,7 @@ add_executable(stl_tests
   tests/test_main.cpp
   tests/test_array_list.cpp
   tests/test_linked_list.cpp
+  tests/test_ring_buffer.cpp
 )
 target_link_libraries(stl_tests PRIVATE stl)
 
