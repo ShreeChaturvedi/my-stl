@@ -48,6 +48,7 @@ build*/
 **/a.out
 **/main
 **/heap_example
+linked-list/list
 
 # OS cruft
 .DS_Store
