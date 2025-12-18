@@ -36,6 +36,8 @@
 !stack/**
 !priority-queue/
 !priority-queue/**
+!list/
+!list/**
 
 # Build artifacts
 build*/
@@ -44,7 +46,6 @@ build*/
 **/a.out
 **/main
 **/heap_example
-**/list
 
 # OS cruft
 .DS_Store
