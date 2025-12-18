@@ -58,6 +58,8 @@
 !unordered-multiset/**
 !deque/
 !deque/**
+!string/
+!string/**
 
 # Build artifacts
 build*/
