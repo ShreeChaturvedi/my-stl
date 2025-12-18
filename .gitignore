@@ -40,6 +40,8 @@
 !list/**
 !queue/
 !queue/**
+!span/
+!span/**
 
 # Build artifacts
 build*/
