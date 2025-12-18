@@ -1,0 +1,19 @@
+# mini-stl repo: track only STL/ (other learn-cpp modules are handled separately)
+/*
+!.gitignore
+!README.md
+!LICENSE
+!STL/
+!STL/**
+
+# Build artifacts
+STL/build/
+**/*.o
+**/*.dSYM/
+**/a.out
+**/main
+**/heap_example
+**/list
+
+# OS cruft
+.DS_Store
