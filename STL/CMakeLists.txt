@@ -6,6 +6,9 @@ set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
+include(CTest)
+enable_testing()
+
 option(STL_ENABLE_WERROR "Treat warnings as errors" ON)
 option(STL_ENABLE_COVERAGE "Enable clang/gcc coverage instrumentation" OFF)
 
@@ -35,6 +38,7 @@ add_executable(stl_tests
   tests/test_trie.cpp
 )
 target_link_libraries(stl_tests PRIVATE stl)
+add_test(NAME stl_tests COMMAND stl_tests)
 
 add_executable(stl_bench
   bench/bench_main.cpp
