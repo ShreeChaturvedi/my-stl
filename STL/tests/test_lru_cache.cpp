@@ -17,3 +17,10 @@ TEST_CASE("LRUCache: insert/get/eviction") {
   CHECK(c.get(1).has_value());
   CHECK(c.get(3).has_value());
 }
+
+TEST_CASE("LRUCache: capacity 0") {
+  LRUCache<int, int> c(0);
+  CHECK(!c.insert(1, 10));
+  CHECK(!c.get(1).has_value());
+  CHECK_EQ(c.size(), 0u);
+}
