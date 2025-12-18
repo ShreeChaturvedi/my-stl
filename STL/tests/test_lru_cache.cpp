@@ -1,6 +1,6 @@
 #include "test.hpp"
 
-#include "../LRU-cache/cache.h"
+#include "../lru-cache/lru_cache.hpp"
 
 TEST_CASE("LRUCache: insert/get/eviction") {
   LRUCache<int, int> c(2);
@@ -17,4 +17,3 @@ TEST_CASE("LRUCache: insert/get/eviction") {
   CHECK(c.get(1).has_value());
   CHECK(c.get(3).has_value());
 }
-

@@ -12,7 +12,7 @@ A modern C++ (C++23) “build-your-own-STL” project: hand-rolled containers, R
 - `STL/unordered-map` — `unordered_map<K, V>`
 - `STL/unique-ptr` — `unique_ptr<T>`
 - `STL/trie` — `Trie`
-- `STL/LRU-cache` — `LRUCache<K, V>`
+- `STL/lru-cache` — `LRUCache<K, V>`
 
 ## Build + Test
 
@@ -38,4 +38,3 @@ LLVM_PROFILE_FILE=STL/build-cov/coverage.profraw ./STL/build-cov/stl_tests
 llvm-profdata merge -sparse STL/build-cov/coverage.profraw -o STL/build-cov/coverage.profdata
 llvm-cov report ./STL/build-cov/stl_tests -instr-profile=STL/build-cov/coverage.profdata
 ```
-
