@@ -1,6 +1,6 @@
 {
   "meta": {
-    "timestamp": "2025-12-19T18:23:13.624312+00:00",
+    "timestamp": "2025-12-19T19:18:43.455464+00:00",
     "platform": "macOS-15.5-arm64-arm-64bit-Mach-O",
     "cpu": "Apple M2",
     "compiler": "Apple clang version 17.0.0 (clang-1700.0.13.5)",
@@ -11,103 +11,103 @@
       "warmup": 1,
       "filter": ""
     },
-    "git_sha": "3973011e475ba6e9e8916d8db6743fb755cc5a6c",
+    "git_sha": "ec67b0ffe438236d1a249f4528fda5bf344b7dfa",
     "git_dirty": false,
     "cmake_build_type": "Release",
     "cxx_compiler": "/usr/bin/c++",
     "cxx_flags_release": "-O3 -DNDEBUG"
   },
-  "run": "docs/benchmarks/runs/bench-20251219-132313-m2.json",
+  "run": "docs/benchmarks/runs/bench-20251219-141843-m2.json",
   "pairs": [
     {
       "case_id": "deque_push_pop",
       "title": "Deque push_back+pop_front",
       "n": 200000,
       "iters": 5,
-      "mini_median_ns_per_op": 1.83083,
-      "std_median_ns_per_op": 5.155,
-      "ratio_mini_vs_std": 0.35515615906886516
+      "mini_median_ns_per_op": 2.30354,
+      "std_median_ns_per_op": 6.17625,
+      "ratio_mini_vs_std": 0.37296741550293466
     },
     {
       "case_id": "vector_push_back_no_reserve",
       "title": "Vector push_back (no reserve)",
       "n": 200000,
       "iters": 5,
-      "mini_median_ns_per_op": 1.18417,
-      "std_median_ns_per_op": 0.98521,
-      "ratio_mini_vs_std": 1.2019467930694978
+      "mini_median_ns_per_op": 0.97375,
+      "std_median_ns_per_op": 0.823125,
+      "ratio_mini_vs_std": 1.1829916476841307
     },
     {
       "case_id": "vector_push_back_reserve",
       "title": "Vector push_back (reserve)",
       "n": 200000,
       "iters": 5,
-      "mini_median_ns_per_op": 0.470205,
-      "std_median_ns_per_op": 0.466875,
-      "ratio_mini_vs_std": 1.0071325301204819
+      "mini_median_ns_per_op": 0.446875,
+      "std_median_ns_per_op": 0.45104,
+      "ratio_mini_vs_std": 0.990765785739624
     },
     {
       "case_id": "unordered_map_emplace_reserve",
       "title": "unordered_map emplace (reserve)",
       "n": 200000,
       "iters": 5,
-      "mini_median_ns_per_op": 48.5696,
-      "std_median_ns_per_op": 41.0194,
-      "ratio_mini_vs_std": 1.1840641257551305
+      "mini_median_ns_per_op": 59.8994,
+      "std_median_ns_per_op": 46.1256,
+      "ratio_mini_vs_std": 1.298615085765822
     },
     {
       "case_id": "map_build_find",
       "title": "map build+find",
       "n": 200000,
       "iters": 5,
-      "mini_median_ns_per_op": 316.52,
-      "std_median_ns_per_op": 236.631,
-      "ratio_mini_vs_std": 1.3376100341882509
+      "mini_median_ns_per_op": 392.299,
+      "std_median_ns_per_op": 239.301,
+      "ratio_mini_vs_std": 1.6393537845642099
     },
     {
       "case_id": "set_build_find",
       "title": "set build+find",
       "n": 200000,
       "iters": 5,
-      "mini_median_ns_per_op": 246.726,
-      "std_median_ns_per_op": 190.28,
-      "ratio_mini_vs_std": 1.2966470464578517
+      "mini_median_ns_per_op": 298.538,
+      "std_median_ns_per_op": 229.745,
+      "ratio_mini_vs_std": 1.299431978933165
     },
     {
       "case_id": "flat_map_build_find",
       "title": "flat_map build+find",
       "n": 200000,
       "iters": 5,
-      "mini_median_ns_per_op": 8675.88,
-      "std_median_ns_per_op": 204.992,
-      "ratio_mini_vs_std": 42.323017483609114
+      "mini_median_ns_per_op": 52.994,
+      "std_median_ns_per_op": 173.944,
+      "ratio_mini_vs_std": 0.30466127029388773
     },
     {
       "case_id": "flat_set_build_find",
       "title": "flat_set build+find",
       "n": 200000,
       "iters": 5,
-      "mini_median_ns_per_op": 4858.02,
-      "std_median_ns_per_op": 201.612,
-      "ratio_mini_vs_std": 24.095887149574434
+      "mini_median_ns_per_op": 50.2373,
+      "std_median_ns_per_op": 177.828,
+      "ratio_mini_vs_std": 0.2825050048361338
     },
     {
       "case_id": "small_vector_push_back",
       "title": "small_vector push_back",
       "n": 200000,
       "iters": 5,
-      "mini_median_ns_per_op": 1.20604,
-      "std_median_ns_per_op": 0.81042,
-      "ratio_mini_vs_std": 1.488166629648824
+      "mini_median_ns_per_op": 1.31125,
+      "std_median_ns_per_op": 0.674165,
+      "ratio_mini_vs_std": 1.944998627932331
     },
     {
       "case_id": "stable_vector_push_back",
       "title": "stable_vector push_back",
       "n": 200000,
       "iters": 5,
-      "mini_median_ns_per_op": 16.4265,
-      "std_median_ns_per_op": 14.4262,
-      "ratio_mini_vs_std": 1.1386574427084055
+      "mini_median_ns_per_op": 17.1433,
+      "std_median_ns_per_op": 15.0219,
+      "ratio_mini_vs_std": 1.1412204847589187
     }
   ]
 }

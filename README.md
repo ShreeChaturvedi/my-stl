@@ -50,7 +50,7 @@ cmake --build build -j
 
 ## Benchmarks (Latest Run)
 
-Run file: `docs/benchmarks/runs/bench-20251219-132313-m2.json`
+Run file: `docs/benchmarks/runs/bench-20251219-141843-m2.json`
 
 - Apple M2, macOS 15.5
 - Apple clang 17.0.0
@@ -58,22 +58,25 @@ Run file: `docs/benchmarks/runs/bench-20251219-132313-m2.json`
 
 Median ns/op (ratio = my-stl / std):
 
-| Case | my-stl | std | Ratio |
+| Case | my-stl (ns/op) | std (ns/op) | Ratio |
 | --- | --- | --- | --- |
-| Deque push_back+pop_front | 1.831 | 5.155 | 0.355 |
-| Vector push_back (no reserve) | 1.184 | 0.985 | 1.202 |
-| Vector push_back (reserve) | 0.470 | 0.467 | 1.007 |
-| unordered_map emplace (reserve) | 48.570 | 41.019 | 1.184 |
-| map build+find | 316.520 | 236.631 | 1.338 |
-| set build+find | 246.726 | 190.280 | 1.297 |
-| flat_map build+find | 8675.880 | 204.992 | 42.323 |
-| flat_set build+find | 4858.020 | 201.612 | 24.096 |
-| small_vector push_back | 1.206 | 0.810 | 1.488 |
-| stable_vector push_back | 16.427 | 14.426 | 1.139 |
+| Deque push_back+pop_front | `2.304` | `6.176` | `0.373x` |
+| Vector push_back (no reserve) | `0.974` | `0.823` | `1.183x` |
+| Vector push_back (reserve) | `0.447` | `0.451` | `0.991x` |
+| unordered_map emplace (reserve) | `59.899` | `46.126` | `1.299x` |
+| map build+find | `392.299` | `239.301` | `1.639x` |
+| set build+find | `298.538` | `229.745` | `1.299x` |
+| flat_map build+find | `52.994` | `173.944` | `0.305x` |
+| flat_set build+find | `50.237` | `177.828` | `0.283x` |
+| small_vector push_back | `1.311` | `0.674` | `1.945x` |
+| stable_vector push_back | `17.143` | `15.022` | `1.141x` |
 
 Full results: `docs/benchmarks/bench_summary.csv`
 
-![Benchmark ratio chart](docs/benchmarks/charts/ratio.svg)
+![Benchmark ratio chart](docs/benchmarks/charts/ratio-light.svg#gh-light-mode-only)
+![Benchmark ratio chart](docs/benchmarks/charts/ratio-dark.svg#gh-dark-mode-only)
+
+flat_map/flat_set are built from sorted keys and queried with shuffled lookups.
 
 ## Run Benchmarks
 

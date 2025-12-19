@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="360" viewBox="0 0 900 360" role="img">
+<style>text{font-family:Arial, sans-serif;font-size:12px;fill:#e6edf3;}.axis{stroke:#8b949e;stroke-width:1;}.bar{fill:#58a6ff;}.baseline{stroke:#f85149;stroke-width:1;stroke-dasharray:4 4;}</style>
+<rect width="100%" height="100%" fill="#0d1117"/>
+<text x="260" y="20">Median ns/op ratio (my-stl / std). Lower is better.</text>
+<line class="axis" x1="260" y1="34" x2="260" y2="340"/>
+<line class="baseline" x1="540.4395528208684" y1="34" x2="540.4395528208684" y2="340"/>
+<text x="10" y="55">Deque push_back+pop_front</text>
+<rect class="bar" x="260" y="40" width="104.6" height="18"/>
+<text x="370.6" y="55">0.37x</text>
+<text x="10" y="83">Vector push_back (no reserve)</text>
+<rect class="bar" x="260" y="68" width="331.8" height="18"/>
+<text x="597.8" y="83">1.18x</text>
+<text x="10" y="111">Vector push_back (reserve)</text>
+<rect class="bar" x="260" y="96" width="277.8" height="18"/>
+<text x="543.8" y="111">0.99x</text>
+<text x="10" y="139">unordered_map emplace (reserve)</text>
+<rect class="bar" x="260" y="124" width="364.2" height="18"/>
+<text x="630.2" y="139">1.30x</text>
+<text x="10" y="167">map build+find</text>
+<rect class="bar" x="260" y="152" width="459.7" height="18"/>
+<text x="725.7" y="167">1.64x</text>
+<text x="10" y="195">set build+find</text>
+<rect class="bar" x="260" y="180" width="364.4" height="18"/>
+<text x="630.4" y="195">1.30x</text>
+<text x="10" y="223">flat_map build+find</text>
+<rect class="bar" x="260" y="208" width="85.4" height="18"/>
+<text x="351.4" y="223">0.30x</text>
+<text x="10" y="251">flat_set build+find</text>
+<rect class="bar" x="260" y="236" width="79.2" height="18"/>
+<text x="345.2" y="251">0.28x</text>
+<text x="10" y="279">small_vector push_back</text>
+<rect class="bar" x="260" y="264" width="545.5" height="18"/>
+<text x="811.5" y="279">1.94x</text>
+<text x="10" y="307">stable_vector push_back</text>
+<rect class="bar" x="260" y="292" width="320.0" height="18"/>
+<text x="586.0" y="307">1.14x</text>
+</svg>
