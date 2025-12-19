@@ -1,27 +1,36 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="900" height="276" viewBox="0 0 900 276" role="img">
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="360" viewBox="0 0 900 360" role="img">
 <style>text{font-family:Arial, sans-serif;font-size:12px;fill:#222;}.axis{stroke:#666;stroke-width:1;}.bar{fill:#2f6f8f;}.baseline{stroke:#c23a3a;stroke-width:1;stroke-dasharray:4 4;}</style>
 <text x="260" y="20">Median ns/op ratio (my-stl / std). Lower is better.</text>
-<line class="axis" x1="260" y1="34" x2="260" y2="256"/>
-<line class="baseline" x1="271.6471958134617" y1="34" x2="271.6471958134617" y2="256"/>
-<text x="10" y="55">Vector push_back (no reserve)</text>
-<rect class="bar" x="260" y="40" width="15.8" height="18"/>
-<text x="281.8" y="55">1.36x</text>
-<text x="10" y="83">Vector push_back (reserve)</text>
-<rect class="bar" x="260" y="68" width="11.7" height="18"/>
-<text x="277.7" y="83">1.00x</text>
-<text x="10" y="111">unordered_map emplace (reserve)</text>
-<rect class="bar" x="260" y="96" width="14.0" height="18"/>
-<text x="280.0" y="111">1.20x</text>
-<text x="10" y="139">flat_map build+find</text>
-<rect class="bar" x="260" y="124" width="545.5" height="18"/>
-<text x="811.5" y="139">46.83x</text>
-<text x="10" y="167">flat_set build+find</text>
-<rect class="bar" x="260" y="152" width="298.7" height="18"/>
-<text x="564.7" y="167">25.65x</text>
-<text x="10" y="195">small_vector push_back</text>
-<rect class="bar" x="260" y="180" width="18.8" height="18"/>
-<text x="284.8" y="195">1.61x</text>
-<text x="10" y="223">stable_vector push_back</text>
-<rect class="bar" x="260" y="208" width="13.0" height="18"/>
-<text x="279.0" y="223">1.12x</text>
+<line class="axis" x1="260" y1="34" x2="260" y2="340"/>
+<line class="baseline" x1="272.8878935833389" y1="34" x2="272.8878935833389" y2="340"/>
+<text x="10" y="55">Deque push_back+pop_front</text>
+<rect class="bar" x="260" y="40" width="4.6" height="18"/>
+<text x="270.6" y="55">0.36x</text>
+<text x="10" y="83">Vector push_back (no reserve)</text>
+<rect class="bar" x="260" y="68" width="15.5" height="18"/>
+<text x="281.5" y="83">1.20x</text>
+<text x="10" y="111">Vector push_back (reserve)</text>
+<rect class="bar" x="260" y="96" width="13.0" height="18"/>
+<text x="279.0" y="111">1.01x</text>
+<text x="10" y="139">unordered_map emplace (reserve)</text>
+<rect class="bar" x="260" y="124" width="15.3" height="18"/>
+<text x="281.3" y="139">1.18x</text>
+<text x="10" y="167">map build+find</text>
+<rect class="bar" x="260" y="152" width="17.2" height="18"/>
+<text x="283.2" y="167">1.34x</text>
+<text x="10" y="195">set build+find</text>
+<rect class="bar" x="260" y="180" width="16.7" height="18"/>
+<text x="282.7" y="195">1.30x</text>
+<text x="10" y="223">flat_map build+find</text>
+<rect class="bar" x="260" y="208" width="545.5" height="18"/>
+<text x="811.5" y="223">42.32x</text>
+<text x="10" y="251">flat_set build+find</text>
+<rect class="bar" x="260" y="236" width="310.5" height="18"/>
+<text x="576.5" y="251">24.10x</text>
+<text x="10" y="279">small_vector push_back</text>
+<rect class="bar" x="260" y="264" width="19.2" height="18"/>
+<text x="285.2" y="279">1.49x</text>
+<text x="10" y="307">stable_vector push_back</text>
+<rect class="bar" x="260" y="292" width="14.7" height="18"/>
+<text x="280.7" y="307">1.14x</text>
 </svg>

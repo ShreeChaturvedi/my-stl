@@ -20,9 +20,9 @@ python3 scripts/bench/report.py --run docs/benchmarks/runs/bench-YYYYMMDD-HHMMSS
 
 ## Latest Run
 
-Run file: `docs/benchmarks/runs/bench-20251219-120903-m2.json`
+Run file: `docs/benchmarks/runs/bench-20251219-132313-m2.json`
 
-- Timestamp (UTC): 2025-12-19T17:09:03Z
+- Timestamp (UTC): 2025-12-19T18:23:13Z
 - Machine: Apple M2, macOS 15.5
 - Compiler: Apple clang 17.0.0
 - Build: Release (`-O3`)
@@ -31,13 +31,16 @@ Summary (median ns/op; ratio = my-stl / std):
 
 | Case | my-stl | std | Ratio |
 | --- | --- | --- | --- |
-| Vector push_back (no reserve) | 0.930 | 0.683 | 1.360 |
-| Vector push_back (reserve) | 0.443 | 0.442 | 1.001 |
-| unordered_map emplace (reserve) | 49.592 | 41.297 | 1.201 |
-| flat_map build+find | 10188.500 | 217.557 | 46.831 |
-| flat_set build+find | 5005.510 | 195.182 | 25.645 |
-| small_vector push_back | 1.037 | 0.643 | 1.613 |
-| stable_vector push_back | 16.395 | 14.678 | 1.117 |
+| Deque push_back+pop_front | 1.831 | 5.155 | 0.355 |
+| Vector push_back (no reserve) | 1.184 | 0.985 | 1.202 |
+| Vector push_back (reserve) | 0.470 | 0.467 | 1.007 |
+| unordered_map emplace (reserve) | 48.570 | 41.019 | 1.184 |
+| map build+find | 316.520 | 236.631 | 1.338 |
+| set build+find | 246.726 | 190.280 | 1.297 |
+| flat_map build+find | 8675.880 | 204.992 | 42.323 |
+| flat_set build+find | 4858.020 | 201.612 | 24.096 |
+| small_vector push_back | 1.206 | 0.810 | 1.488 |
+| stable_vector push_back | 16.427 | 14.426 | 1.139 |
 
 See `docs/benchmarks/bench_summary.csv` for the full table.
 The chart below shows the ratio (my-stl / std). Lower is better.

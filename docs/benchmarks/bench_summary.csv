@@ -1,8 +1,11 @@
 case_id,title,n,iters,mini_median_ns_per_op,std_median_ns_per_op,ratio_mini_vs_std
-vector_push_back_no_reserve,Vector push_back (no reserve),200000,5,0.929585,0.683335,1.3603649747195738
-vector_push_back_reserve,Vector push_back (reserve),200000,5,0.4425,0.441875,1.0014144271570014
-unordered_map_emplace_reserve,unordered_map emplace (reserve),200000,5,49.5915,41.2973,1.2008412172224334
-flat_map_build_find,flat_map build+find,200000,5,10188.5,217.557,46.83140510303047
-flat_set_build_find,flat_set build+find,200000,5,5005.51,195.182,25.64534639464705
-small_vector_push_back,small_vector push_back,200000,5,1.03729,0.642915,1.6134170146909002
-stable_vector_push_back,stable_vector push_back,200000,5,16.395,14.6775,1.1170158405723045
+deque_push_pop,Deque push_back+pop_front,200000,5,1.83083,5.155,0.35515615906886516
+vector_push_back_no_reserve,Vector push_back (no reserve),200000,5,1.18417,0.98521,1.2019467930694978
+vector_push_back_reserve,Vector push_back (reserve),200000,5,0.470205,0.466875,1.0071325301204819
+unordered_map_emplace_reserve,unordered_map emplace (reserve),200000,5,48.5696,41.0194,1.1840641257551305
+map_build_find,map build+find,200000,5,316.52,236.631,1.3376100341882509
+set_build_find,set build+find,200000,5,246.726,190.28,1.2966470464578517
+flat_map_build_find,flat_map build+find,200000,5,8675.88,204.992,42.323017483609114
+flat_set_build_find,flat_set build+find,200000,5,4858.02,201.612,24.095887149574434
+small_vector_push_back,small_vector push_back,200000,5,1.20604,0.81042,1.488166629648824
+stable_vector_push_back,stable_vector push_back,200000,5,16.4265,14.4262,1.1386574427084055

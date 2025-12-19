@@ -1,6 +1,6 @@
 {
   "meta": {
-    "timestamp": "2025-12-19T17:09:03.475881+00:00",
+    "timestamp": "2025-12-19T18:23:13.624312+00:00",
     "platform": "macOS-15.5-arm64-arm-64bit-Mach-O",
     "cpu": "Apple M2",
     "compiler": "Apple clang version 17.0.0 (clang-1700.0.13.5)",
@@ -11,76 +11,103 @@
       "warmup": 1,
       "filter": ""
     },
-    "git_sha": "a1bef1b056ca508f48c3c925c792381613a60fb5",
+    "git_sha": "3973011e475ba6e9e8916d8db6743fb755cc5a6c",
     "git_dirty": false,
     "cmake_build_type": "Release",
     "cxx_compiler": "/usr/bin/c++",
     "cxx_flags_release": "-O3 -DNDEBUG"
   },
-  "run": "docs/benchmarks/runs/bench-20251219-120903-m2.json",
+  "run": "docs/benchmarks/runs/bench-20251219-132313-m2.json",
   "pairs": [
+    {
+      "case_id": "deque_push_pop",
+      "title": "Deque push_back+pop_front",
+      "n": 200000,
+      "iters": 5,
+      "mini_median_ns_per_op": 1.83083,
+      "std_median_ns_per_op": 5.155,
+      "ratio_mini_vs_std": 0.35515615906886516
+    },
     {
       "case_id": "vector_push_back_no_reserve",
       "title": "Vector push_back (no reserve)",
       "n": 200000,
       "iters": 5,
-      "mini_median_ns_per_op": 0.929585,
-      "std_median_ns_per_op": 0.683335,
-      "ratio_mini_vs_std": 1.3603649747195738
+      "mini_median_ns_per_op": 1.18417,
+      "std_median_ns_per_op": 0.98521,
+      "ratio_mini_vs_std": 1.2019467930694978
     },
     {
       "case_id": "vector_push_back_reserve",
       "title": "Vector push_back (reserve)",
       "n": 200000,
       "iters": 5,
-      "mini_median_ns_per_op": 0.4425,
-      "std_median_ns_per_op": 0.441875,
-      "ratio_mini_vs_std": 1.0014144271570014
+      "mini_median_ns_per_op": 0.470205,
+      "std_median_ns_per_op": 0.466875,
+      "ratio_mini_vs_std": 1.0071325301204819
     },
     {
       "case_id": "unordered_map_emplace_reserve",
       "title": "unordered_map emplace (reserve)",
       "n": 200000,
       "iters": 5,
-      "mini_median_ns_per_op": 49.5915,
-      "std_median_ns_per_op": 41.2973,
-      "ratio_mini_vs_std": 1.2008412172224334
+      "mini_median_ns_per_op": 48.5696,
+      "std_median_ns_per_op": 41.0194,
+      "ratio_mini_vs_std": 1.1840641257551305
+    },
+    {
+      "case_id": "map_build_find",
+      "title": "map build+find",
+      "n": 200000,
+      "iters": 5,
+      "mini_median_ns_per_op": 316.52,
+      "std_median_ns_per_op": 236.631,
+      "ratio_mini_vs_std": 1.3376100341882509
+    },
+    {
+      "case_id": "set_build_find",
+      "title": "set build+find",
+      "n": 200000,
+      "iters": 5,
+      "mini_median_ns_per_op": 246.726,
+      "std_median_ns_per_op": 190.28,
+      "ratio_mini_vs_std": 1.2966470464578517
     },
     {
       "case_id": "flat_map_build_find",
       "title": "flat_map build+find",
       "n": 200000,
       "iters": 5,
-      "mini_median_ns_per_op": 10188.5,
-      "std_median_ns_per_op": 217.557,
-      "ratio_mini_vs_std": 46.83140510303047
+      "mini_median_ns_per_op": 8675.88,
+      "std_median_ns_per_op": 204.992,
+      "ratio_mini_vs_std": 42.323017483609114
     },
     {
       "case_id": "flat_set_build_find",
       "title": "flat_set build+find",
       "n": 200000,
       "iters": 5,
-      "mini_median_ns_per_op": 5005.51,
-      "std_median_ns_per_op": 195.182,
-      "ratio_mini_vs_std": 25.64534639464705
+      "mini_median_ns_per_op": 4858.02,
+      "std_median_ns_per_op": 201.612,
+      "ratio_mini_vs_std": 24.095887149574434
     },
     {
       "case_id": "small_vector_push_back",
       "title": "small_vector push_back",
       "n": 200000,
       "iters": 5,
-      "mini_median_ns_per_op": 1.03729,
-      "std_median_ns_per_op": 0.642915,
-      "ratio_mini_vs_std": 1.6134170146909002
+      "mini_median_ns_per_op": 1.20604,
+      "std_median_ns_per_op": 0.81042,
+      "ratio_mini_vs_std": 1.488166629648824
     },
     {
       "case_id": "stable_vector_push_back",
       "title": "stable_vector push_back",
       "n": 200000,
       "iters": 5,
-      "mini_median_ns_per_op": 16.395,
-      "std_median_ns_per_op": 14.6775,
-      "ratio_mini_vs_std": 1.1170158405723045
+      "mini_median_ns_per_op": 16.4265,
+      "std_median_ns_per_op": 14.4262,
+      "ratio_mini_vs_std": 1.1386574427084055
     }
   ]
 }
