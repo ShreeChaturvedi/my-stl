@@ -26,5 +26,6 @@ Each page describes API surface, invariants, complexity, and known differences v
 - `unordered_multimap<K, V>` -- `unordered_multimap.md`
 - `unordered_multiset<K>` -- `unordered_multiset.md`
 - `unique_ptr<T>` -- `unique_ptr.md`
+- `Trie` -- `trie.md`
 - `Vector<T>` -- `vector.md`
 - `RingBuffer<T, N>` -- `ring_buffer.md`
