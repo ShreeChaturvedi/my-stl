@@ -8,4 +8,5 @@ Each page describes API surface, invariants, complexity, and known differences v
 - `Deque<T>` -- `deque.md`
 - `ForwardList<T>` -- `forward_list.md`
 - `LinkedList<T>` -- `linked_list.md`
+- `List<T>` -- `list.md`
 - `Vector<T>` -- `vector.md`
