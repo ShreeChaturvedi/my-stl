@@ -78,6 +78,11 @@ cmake --build build -j
 Benchmark methodology, charts, and recorded results are in `docs/benchmarks.md`.
 Use the scripts in `scripts/bench/` to run and regenerate reports on your machine.
 
+## Documentation
+
+- `docs/containers/README.md` -- per-container notes, complexity, differences vs `std::`
+- `docs/benchmarks.md` -- benchmark methodology and results
+
 ## Repository Layout
 
 - `tests/` -- unit tests
