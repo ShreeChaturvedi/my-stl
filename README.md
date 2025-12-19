@@ -45,8 +45,10 @@ Utilities:
 ```bash
 cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug
 cmake --build build -j
-./build/stl_tests
+ctest --test-dir build --output-on-failure
 ```
+
+Tests are written with Catch2.
 
 ## Benchmarks (Latest Run)
 

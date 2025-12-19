@@ -8,13 +8,13 @@ Contributions that improve correctness, clarity, tests, and performance are welc
 ```bash
 cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug
 cmake --build build -j
-./build/stl_tests
+ctest --test-dir build --output-on-failure
 ```
 
 ## Project Structure
 
 - Containers live in top-level folders (e.g., `vector/`, `unordered-map/`) with `*.hpp` + `*.tpp`.
-- Tests live in `tests/` and are built into `stl_tests`.
+- Tests live in `tests/` and are built into `stl_tests` (Catch2).
 - Benchmarks live in `bench/` and are built into `stl_bench`.
 - Documentation lives in `docs/`.
 

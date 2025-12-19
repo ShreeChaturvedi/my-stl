@@ -12,6 +12,8 @@ enable_testing()
 option(STL_ENABLE_WERROR "Treat warnings as errors" ON)
 option(STL_ENABLE_COVERAGE "Enable clang/gcc coverage instrumentation" OFF)
 
+include(FetchContent)
+
 add_library(stl INTERFACE)
 target_include_directories(stl INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}")
 
@@ -35,8 +37,14 @@ if (STL_ENABLE_COVERAGE)
   endif()
 endif()
 
+FetchContent_Declare(
+  Catch2
+  GIT_REPOSITORY https://github.com/catchorg/Catch2.git
+  GIT_TAG v3.9.1
+)
+FetchContent_MakeAvailable(Catch2)
+
 add_executable(stl_tests
-  tests/test_main.cpp
   tests/test_array_list.cpp
   tests/test_linked_list.cpp
   tests/test_forward_list.cpp
@@ -62,8 +70,9 @@ add_executable(stl_tests
   tests/test_small_vector.cpp
   tests/test_stable_vector.cpp
 )
-target_link_libraries(stl_tests PRIVATE stl)
-add_test(NAME stl_tests COMMAND stl_tests)
+target_link_libraries(stl_tests PRIVATE stl Catch2::Catch2WithMain)
+include(Catch)
+catch_discover_tests(stl_tests)
 
 add_executable(stl_bench
   bench/bench_main.cpp
