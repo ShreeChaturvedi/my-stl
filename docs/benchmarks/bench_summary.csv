@@ -1,11 +1,11 @@
 case_id,title,n,iters,mini_median_ns_per_op,std_median_ns_per_op,ratio_mini_vs_std
-deque_push_pop,Deque push_back+pop_front,200000,5,2.30354,6.17625,0.37296741550293466
-vector_push_back_no_reserve,Vector push_back (no reserve),200000,5,0.97375,0.823125,1.1829916476841307
-vector_push_back_reserve,Vector push_back (reserve),200000,5,0.446875,0.45104,0.990765785739624
-unordered_map_emplace_reserve,unordered_map emplace (reserve),200000,5,59.8994,46.1256,1.298615085765822
-map_build_find,map build+find,200000,5,392.299,239.301,1.6393537845642099
-set_build_find,set build+find,200000,5,298.538,229.745,1.299431978933165
-flat_map_build_find,flat_map build+find,200000,5,52.994,173.944,0.30466127029388773
-flat_set_build_find,flat_set build+find,200000,5,50.2373,177.828,0.2825050048361338
-small_vector_push_back,small_vector push_back,200000,5,1.31125,0.674165,1.944998627932331
-stable_vector_push_back,stable_vector push_back,200000,5,17.1433,15.0219,1.1412204847589187
+deque_push_pop,Deque push_back+pop_front,200000,5,1.72021,2.89208,0.5948002821498714
+vector_push_back_no_reserve,Vector push_back (no reserve),200000,5,1.60938,2.51625,0.6395946348733235
+vector_push_back_reserve,Vector push_back (reserve),200000,5,0.462915,0.464585,0.9964053940613666
+unordered_map_emplace_reserve,unordered_map emplace (reserve),200000,5,48.8856,41.3246,1.1829660783165474
+map_build_find,map build+find,200000,5,239.379,213.428,1.1215913563356261
+set_build_find,set build+find,200000,5,216.455,190.596,1.1356744107956096
+flat_map_build_find,flat_map build+find,200000,5,50.2217,133.032,0.37751593601539474
+flat_set_build_find,flat_set build+find,200000,5,43.6017,189.874,0.22963491578625828
+small_vector_push_back,small_vector push_back,200000,5,0.855835,0.804165,1.0642529829077365
+stable_vector_push_back,stable_vector push_back,200000,5,16.355,14.6121,1.11927785876089

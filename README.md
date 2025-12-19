@@ -50,7 +50,7 @@ cmake --build build -j
 
 ## Benchmarks (Latest Run)
 
-Run file: `docs/benchmarks/runs/bench-20251219-141843-m2.json`
+Run file: `docs/benchmarks/runs/bench-20251219-154045-m2.json`
 
 - Apple M2, macOS 15.5
 - Apple clang 17.0.0
@@ -60,16 +60,16 @@ Median ns/op (ratio = my-stl / std):
 
 | Case | my-stl (ns/op) | std (ns/op) | Ratio |
 | --- | --- | --- | --- |
-| Deque push_back+pop_front | `2.304` | `6.176` | `0.373x` |
-| Vector push_back (no reserve) | `0.974` | `0.823` | `1.183x` |
-| Vector push_back (reserve) | `0.447` | `0.451` | `0.991x` |
-| unordered_map emplace (reserve) | `59.899` | `46.126` | `1.299x` |
-| map build+find | `392.299` | `239.301` | `1.639x` |
-| set build+find | `298.538` | `229.745` | `1.299x` |
-| flat_map build+find | `52.994` | `173.944` | `0.305x` |
-| flat_set build+find | `50.237` | `177.828` | `0.283x` |
-| small_vector push_back | `1.311` | `0.674` | `1.945x` |
-| stable_vector push_back | `17.143` | `15.022` | `1.141x` |
+| Deque push_back+pop_front | `1.720` | `2.892` | `0.595x` |
+| Vector push_back (no reserve) | `1.609` | `2.516` | `0.640x` |
+| Vector push_back (reserve) | `0.463` | `0.465` | `0.996x` |
+| unordered_map emplace (reserve) | `48.886` | `41.325` | `1.183x` |
+| map build+find | `239.379` | `213.428` | `1.122x` |
+| set build+find | `216.455` | `190.596` | `1.136x` |
+| flat_map build+find | `50.222` | `133.032` | `0.378x` |
+| flat_set build+find | `43.602` | `189.874` | `0.230x` |
+| small_vector push_back | `0.856` | `0.804` | `1.064x` |
+| stable_vector push_back | `16.355` | `14.612` | `1.119x` |
 
 Full results: `docs/benchmarks/bench_summary.csv`
 
