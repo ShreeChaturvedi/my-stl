@@ -24,4 +24,3 @@ TEST_CASE("Span: from Vector") {
   CHECK_EQ(s.size(), 2u);
   CHECK_EQ(s[1], 20);
 }
-

@@ -14,7 +14,8 @@ public:
     Node* node = root_.get();
     for (unsigned char ch : word) {
       auto& child = node->children[ch];
-      if (!child) child.reset(new Node{});
+      if (!child)
+        child.reset(new Node{});
       node = child.get();
     }
     node->terminal = true;
@@ -24,13 +25,16 @@ public:
     const Node* node = root_.get();
     for (unsigned char ch : word) {
       const auto& child = node->children[ch];
-      if (!child) return false;
+      if (!child)
+        return false;
       node = child.get();
     }
     return node->terminal;
   }
 
-  void erase(std::string_view word) { (void)erase_impl(root_.get(), word, 0); }
+  void erase(std::string_view word) {
+    (void)erase_impl(root_.get(), word, 0);
+  }
 
 private:
   struct Node {
@@ -42,13 +46,15 @@ private:
 
   static bool has_children(const Node* node) {
     for (const auto& c : node->children) {
-      if (c) return true;
+      if (c)
+        return true;
     }
     return false;
   }
 
   static bool erase_impl(Node* node, std::string_view word, std::size_t pos) {
-    if (!node) return false;
+    if (!node)
+      return false;
     if (pos == word.size()) {
       node->terminal = false;
       return !has_children(node);
@@ -56,10 +62,12 @@ private:
 
     const unsigned char ch = static_cast<unsigned char>(word[pos]);
     auto& child = node->children[ch];
-    if (!child) return false;
+    if (!child)
+      return false;
 
     const bool should_delete_child = erase_impl(child.get(), word, pos + 1);
-    if (should_delete_child) child.reset();
+    if (should_delete_child)
+      child.reset();
 
     return !node->terminal && !has_children(node);
   }

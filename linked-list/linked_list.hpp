@@ -4,8 +4,7 @@
 #include <iostream>
 #include <utility>
 
-template <typename T>
-class LinkedList {
+template <typename T> class LinkedList {
 public:
   LinkedList();
   LinkedList(const LinkedList& other);
@@ -24,7 +23,8 @@ public:
   T& operator[](std::size_t index);
   const T& operator[](std::size_t index) const;
   friend std::ostream& operator<<(std::ostream& os, const LinkedList<T>& list) {
-    if (list.size_ == 0) return os << "[]";
+    if (list.size_ == 0)
+      return os << "[]";
 
     Node* it = list.sentinel_->next;
     os << '[';
@@ -40,7 +40,7 @@ private:
   struct Node {
     T data;
     Node* next;
-    
+
     Node() : data(T{}), next(nullptr) {}
     Node(const T& value, Node* n) : data(value), next(n) {}
   };

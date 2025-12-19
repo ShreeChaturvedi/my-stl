@@ -6,8 +6,7 @@
 #include <type_traits>
 #include <utility>
 
-template <typename T>
-class ForwardList {
+template <typename T> class ForwardList {
 public:
   class iterator;
   class const_iterator;
@@ -29,8 +28,7 @@ public:
   void push_front(const T& value);
   void push_front(T&& value);
 
-  template <typename... Args>
-  T& emplace_front(Args&&... args);
+  template <typename... Args> T& emplace_front(Args&&... args);
 
   iterator before_begin() noexcept;
   const_iterator before_begin() const noexcept;
@@ -47,8 +45,7 @@ public:
   iterator insert_after(iterator pos, const T& value);
   iterator insert_after(iterator pos, T&& value);
 
-  template <typename... Args>
-  iterator emplace_after(iterator pos, Args&&... args);
+  template <typename... Args> iterator emplace_after(iterator pos, Args&&... args);
 
 private:
   struct NodeBase {
@@ -63,14 +60,17 @@ private:
 
   NodeBase head_;
 
-  static Node* as_node(NodeBase* p) { return static_cast<Node*>(p); }
-  static const Node* as_node(const NodeBase* p) { return static_cast<const Node*>(p); }
+  static Node* as_node(NodeBase* p) {
+    return static_cast<Node*>(p);
+  }
+  static const Node* as_node(const NodeBase* p) {
+    return static_cast<const Node*>(p);
+  }
 
   void steal(ForwardList&& other) noexcept;
 };
 
-template <typename T>
-class ForwardList<T>::iterator {
+template <typename T> class ForwardList<T>::iterator {
 public:
   using value_type = T;
   using difference_type = std::ptrdiff_t;
@@ -80,8 +80,12 @@ public:
 
   iterator() noexcept : node_(nullptr) {}
 
-  reference operator*() const { return ForwardList::as_node(node_)->value; }
-  pointer operator->() const { return std::addressof(operator*()); }
+  reference operator*() const {
+    return ForwardList::as_node(node_)->value;
+  }
+  pointer operator->() const {
+    return std::addressof(operator*());
+  }
 
   iterator& operator++() {
     node_ = node_->next;
@@ -94,8 +98,12 @@ public:
     return tmp;
   }
 
-  bool operator==(const iterator& other) const { return node_ == other.node_; }
-  bool operator!=(const iterator& other) const { return node_ != other.node_; }
+  bool operator==(const iterator& other) const {
+    return node_ == other.node_;
+  }
+  bool operator!=(const iterator& other) const {
+    return node_ != other.node_;
+  }
 
 private:
   friend class ForwardList;
@@ -105,8 +113,7 @@ private:
   NodeBase* node_;
 };
 
-template <typename T>
-class ForwardList<T>::const_iterator {
+template <typename T> class ForwardList<T>::const_iterator {
 public:
   using value_type = const T;
   using difference_type = std::ptrdiff_t;
@@ -117,8 +124,12 @@ public:
   const_iterator() noexcept : node_(nullptr) {}
   const_iterator(iterator it) noexcept : node_(it.node_) {}
 
-  reference operator*() const { return ForwardList::as_node(node_)->value; }
-  pointer operator->() const { return std::addressof(operator*()); }
+  reference operator*() const {
+    return ForwardList::as_node(node_)->value;
+  }
+  pointer operator->() const {
+    return std::addressof(operator*());
+  }
 
   const_iterator& operator++() {
     node_ = node_->next;
@@ -131,8 +142,12 @@ public:
     return tmp;
   }
 
-  bool operator==(const const_iterator& other) const { return node_ == other.node_; }
-  bool operator!=(const const_iterator& other) const { return node_ != other.node_; }
+  bool operator==(const const_iterator& other) const {
+    return node_ == other.node_;
+  }
+  bool operator!=(const const_iterator& other) const {
+    return node_ != other.node_;
+  }
 
 private:
   friend class ForwardList;

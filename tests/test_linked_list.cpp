@@ -5,7 +5,8 @@
 TEST_CASE("LinkedList: append/index/size") {
   LinkedList<int> xs;
   CHECK_EQ(xs.size(), 0u);
-  for (int i = 0; i < 5; ++i) xs.append(i);
+  for (int i = 0; i < 5; ++i)
+    xs.append(i);
   CHECK_EQ(xs.size(), 5u);
   CHECK_EQ(xs[0], 0);
   CHECK_EQ(xs[4], 4);

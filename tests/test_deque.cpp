@@ -25,10 +25,12 @@ TEST_CASE("Deque: push/pop front/back and indexing") {
 
 TEST_CASE("Deque: wraparound growth") {
   Deque<int> d;
-  for (int i = 0; i < 50; ++i) d.push_back(i);
-  for (int i = 0; i < 25; ++i) d.pop_front();
-  for (int i = 0; i < 50; ++i) d.push_front(1000 + i);
+  for (int i = 0; i < 50; ++i)
+    d.push_back(i);
+  for (int i = 0; i < 25; ++i)
+    d.pop_front();
+  for (int i = 0; i < 50; ++i)
+    d.push_front(1000 + i);
   CHECK_EQ(d.size(), 75u);
   CHECK_EQ(d.back(), 49);
 }
-

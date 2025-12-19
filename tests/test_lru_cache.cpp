@@ -12,7 +12,7 @@ TEST_CASE("LRUCache: insert/get/eviction") {
   CHECK(v.has_value());
   CHECK_EQ(v->get(), 10);
 
-  CHECK(c.insert(3, 30));  // evicts key 2
+  CHECK(c.insert(3, 30)); // evicts key 2
   CHECK(!c.get(2).has_value());
   CHECK(c.get(1).has_value());
   CHECK(c.get(3).has_value());

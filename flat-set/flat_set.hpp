@@ -8,8 +8,7 @@
 #include <stdexcept>
 #include <utility>
 
-template <typename Key, typename Compare = std::less<Key>>
-class FlatSet {
+template <typename Key, typename Compare = std::less<Key>> class FlatSet {
 public:
   using key_type = Key;
   using value_type = Key;
@@ -20,27 +19,51 @@ public:
   FlatSet() = default;
   explicit FlatSet(Compare comp) : comp_(std::move(comp)) {}
 
-  iterator begin() noexcept { return data_.begin(); }
-  const_iterator begin() const noexcept { return data_.begin(); }
-  const_iterator cbegin() const noexcept { return data_.cbegin(); }
-  iterator end() noexcept { return data_.end(); }
-  const_iterator end() const noexcept { return data_.end(); }
-  const_iterator cend() const noexcept { return data_.cend(); }
+  iterator begin() noexcept {
+    return data_.begin();
+  }
+  const_iterator begin() const noexcept {
+    return data_.begin();
+  }
+  const_iterator cbegin() const noexcept {
+    return data_.cbegin();
+  }
+  iterator end() noexcept {
+    return data_.end();
+  }
+  const_iterator end() const noexcept {
+    return data_.end();
+  }
+  const_iterator cend() const noexcept {
+    return data_.cend();
+  }
 
-  size_type size() const noexcept { return data_.size(); }
-  bool empty() const noexcept { return data_.empty(); }
-  void clear() noexcept { data_.clear(); }
-  void reserve(size_type n) { data_.reserve(n); }
+  size_type size() const noexcept {
+    return data_.size();
+  }
+  bool empty() const noexcept {
+    return data_.empty();
+  }
+  void clear() noexcept {
+    data_.clear();
+  }
+  void reserve(size_type n) {
+    data_.reserve(n);
+  }
 
   std::pair<iterator, bool> insert(const Key& key);
   std::pair<iterator, bool> insert(Key&& key);
 
   iterator find(const Key& key) noexcept;
   const_iterator find(const Key& key) const noexcept;
-  bool contains(const Key& key) const noexcept { return find(key) != end(); }
+  bool contains(const Key& key) const noexcept {
+    return find(key) != end();
+  }
 
   size_type erase(const Key& key);
-  iterator erase(const_iterator pos) { return data_.erase(pos); }
+  iterator erase(const_iterator pos) {
+    return data_.erase(pos);
+  }
 
 private:
   static bool keys_equal(const Compare& comp, const Key& a, const Key& b) {
@@ -55,4 +78,3 @@ private:
 };
 
 #include "flat_set.tpp"
-

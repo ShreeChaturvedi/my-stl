@@ -42,4 +42,3 @@ TEST_CASE("FlatSet: erase") {
   CHECK_EQ(*s.begin(), 1);
   CHECK_EQ(*(s.begin() + 1), 3);
 }
-

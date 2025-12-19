@@ -10,8 +10,7 @@
 #include <type_traits>
 #include <utility>
 
-template <typename T>
-class StableVector {
+template <typename T> class StableVector {
 public:
   using value_type = T;
   using size_type = std::size_t;
@@ -29,13 +28,25 @@ public:
   StableVector& operator=(const StableVector& other);
   StableVector& operator=(StableVector&& other) noexcept = default;
 
-  size_type size() const noexcept { return slots_.size(); }
-  bool empty() const noexcept { return slots_.empty(); }
-  void clear() noexcept { slots_.clear(); }
-  void reserve(size_type n) { slots_.reserve(n); }
+  size_type size() const noexcept {
+    return slots_.size();
+  }
+  bool empty() const noexcept {
+    return slots_.empty();
+  }
+  void clear() noexcept {
+    slots_.clear();
+  }
+  void reserve(size_type n) {
+    slots_.reserve(n);
+  }
 
-  reference operator[](size_type i) noexcept { return *slots_[i]; }
-  const_reference operator[](size_type i) const noexcept { return *slots_[i]; }
+  reference operator[](size_type i) noexcept {
+    return *slots_[i];
+  }
+  const_reference operator[](size_type i) const noexcept {
+    return *slots_[i];
+  }
   reference at(size_type i);
   const_reference at(size_type i) const;
 
@@ -44,18 +55,24 @@ public:
   reference back();
   const_reference back() const;
 
-  template <typename... Args>
-  reference emplace_back(Args&&... args);
+  template <typename... Args> reference emplace_back(Args&&... args);
 
-  void push_back(const T& value) { emplace_back(value); }
-  void push_back(T&& value) { emplace_back(std::move(value)); }
+  void push_back(const T& value) {
+    emplace_back(value);
+  }
+  void push_back(T&& value) {
+    emplace_back(std::move(value));
+  }
   void pop_back();
 
-  template <typename... Args>
-  iterator emplace(const_iterator pos, Args&&... args);
+  template <typename... Args> iterator emplace(const_iterator pos, Args&&... args);
 
-  iterator insert(const_iterator pos, const T& value) { return emplace(pos, value); }
-  iterator insert(const_iterator pos, T&& value) { return emplace(pos, std::move(value)); }
+  iterator insert(const_iterator pos, const T& value) {
+    return emplace(pos, value);
+  }
+  iterator insert(const_iterator pos, T&& value) {
+    return emplace(pos, std::move(value));
+  }
 
   iterator erase(const_iterator pos);
   iterator erase(const_iterator first, const_iterator last);
@@ -78,8 +95,12 @@ public:
     iterator() = default;
     explicit iterator(unique_ptr<T>* p) : p_(p) {}
 
-    reference operator*() const { return **p_; }
-    pointer operator->() const { return p_->get(); }
+    reference operator*() const {
+      return **p_;
+    }
+    pointer operator->() const {
+      return p_->get();
+    }
 
     iterator& operator++() {
       ++p_;
@@ -109,19 +130,41 @@ public:
       return *this;
     }
 
-    friend iterator operator+(iterator it, difference_type n) { return iterator(it.p_ + n); }
-    friend iterator operator+(difference_type n, iterator it) { return iterator(it.p_ + n); }
-    friend iterator operator-(iterator it, difference_type n) { return iterator(it.p_ - n); }
-    friend difference_type operator-(const iterator& a, const iterator& b) { return a.p_ - b.p_; }
+    friend iterator operator+(iterator it, difference_type n) {
+      return iterator(it.p_ + n);
+    }
+    friend iterator operator+(difference_type n, iterator it) {
+      return iterator(it.p_ + n);
+    }
+    friend iterator operator-(iterator it, difference_type n) {
+      return iterator(it.p_ - n);
+    }
+    friend difference_type operator-(const iterator& a, const iterator& b) {
+      return a.p_ - b.p_;
+    }
 
-    friend bool operator==(const iterator& a, const iterator& b) { return a.p_ == b.p_; }
-    friend bool operator!=(const iterator& a, const iterator& b) { return a.p_ != b.p_; }
-    friend bool operator<(const iterator& a, const iterator& b) { return a.p_ < b.p_; }
-    friend bool operator<=(const iterator& a, const iterator& b) { return a.p_ <= b.p_; }
-    friend bool operator>(const iterator& a, const iterator& b) { return a.p_ > b.p_; }
-    friend bool operator>=(const iterator& a, const iterator& b) { return a.p_ >= b.p_; }
+    friend bool operator==(const iterator& a, const iterator& b) {
+      return a.p_ == b.p_;
+    }
+    friend bool operator!=(const iterator& a, const iterator& b) {
+      return a.p_ != b.p_;
+    }
+    friend bool operator<(const iterator& a, const iterator& b) {
+      return a.p_ < b.p_;
+    }
+    friend bool operator<=(const iterator& a, const iterator& b) {
+      return a.p_ <= b.p_;
+    }
+    friend bool operator>(const iterator& a, const iterator& b) {
+      return a.p_ > b.p_;
+    }
+    friend bool operator>=(const iterator& a, const iterator& b) {
+      return a.p_ >= b.p_;
+    }
 
-    unique_ptr<T>* base() const { return p_; }
+    unique_ptr<T>* base() const {
+      return p_;
+    }
 
   private:
     unique_ptr<T>* p_ = nullptr;
@@ -139,8 +182,12 @@ public:
     explicit const_iterator(const unique_ptr<T>* p) : p_(p) {}
     const_iterator(iterator it) : p_(it.base()) {}
 
-    reference operator*() const { return **p_; }
-    pointer operator->() const { return p_->get(); }
+    reference operator*() const {
+      return **p_;
+    }
+    pointer operator->() const {
+      return p_->get();
+    }
 
     const_iterator& operator++() {
       ++p_;
@@ -183,22 +230,35 @@ public:
       return a.p_ - b.p_;
     }
 
-    friend bool operator==(const const_iterator& a, const const_iterator& b) { return a.p_ == b.p_; }
-    friend bool operator!=(const const_iterator& a, const const_iterator& b) { return a.p_ != b.p_; }
-    friend bool operator<(const const_iterator& a, const const_iterator& b) { return a.p_ < b.p_; }
-    friend bool operator<=(const const_iterator& a, const const_iterator& b) { return a.p_ <= b.p_; }
-    friend bool operator>(const const_iterator& a, const const_iterator& b) { return a.p_ > b.p_; }
-    friend bool operator>=(const const_iterator& a, const const_iterator& b) { return a.p_ >= b.p_; }
+    friend bool operator==(const const_iterator& a, const const_iterator& b) {
+      return a.p_ == b.p_;
+    }
+    friend bool operator!=(const const_iterator& a, const const_iterator& b) {
+      return a.p_ != b.p_;
+    }
+    friend bool operator<(const const_iterator& a, const const_iterator& b) {
+      return a.p_ < b.p_;
+    }
+    friend bool operator<=(const const_iterator& a, const const_iterator& b) {
+      return a.p_ <= b.p_;
+    }
+    friend bool operator>(const const_iterator& a, const const_iterator& b) {
+      return a.p_ > b.p_;
+    }
+    friend bool operator>=(const const_iterator& a, const const_iterator& b) {
+      return a.p_ >= b.p_;
+    }
 
-    const unique_ptr<T>* base() const { return p_; }
+    const unique_ptr<T>* base() const {
+      return p_;
+    }
 
   private:
     const unique_ptr<T>* p_ = nullptr;
   };
 
 private:
-  template <typename... Args>
-  static unique_ptr<T> make(Args&&... args) {
+  template <typename... Args> static unique_ptr<T> make(Args&&... args) {
     return unique_ptr<T>(new T(std::forward<Args>(args)...));
   }
 

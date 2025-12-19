@@ -10,7 +10,8 @@ TEST_CASE("SmallVector: inline growth and accessors") {
   CHECK(xs.using_inline_storage());
   CHECK_EQ(xs.capacity(), 4u);
 
-  for (int i = 0; i < 4; ++i) xs.push_back(i);
+  for (int i = 0; i < 4; ++i)
+    xs.push_back(i);
   CHECK(xs.using_inline_storage());
   CHECK_EQ(xs.size(), 4u);
   CHECK_EQ(xs.front(), 0);
@@ -63,7 +64,7 @@ struct MoveOnlyNoAssign {
   MoveOnlyNoAssign(MoveOnlyNoAssign&&) noexcept = default;
   MoveOnlyNoAssign& operator=(MoveOnlyNoAssign&&) = delete;
 };
-}  // namespace
+} // namespace
 
 TEST_CASE("SmallVector: insert/erase without assignment") {
   SmallVector<MoveOnlyNoAssign, 4> xs;
@@ -78,4 +79,3 @@ TEST_CASE("SmallVector: insert/erase without assignment") {
   CHECK_EQ(xs.size(), 2u);
   CHECK_EQ(xs[1].value, 3);
 }
-

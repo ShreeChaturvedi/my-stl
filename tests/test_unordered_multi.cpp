@@ -12,7 +12,8 @@ TEST_CASE("unordered_multimap: duplicates and equal_range") {
 
   auto [first, last] = m.equal_range(1);
   int sum = 0;
-  for (auto it = first; it != last; ++it) sum += it->second;
+  for (auto it = first; it != last; ++it)
+    sum += it->second;
   CHECK_EQ(sum, 30);
 
   CHECK_EQ(m.erase(1), 2u);
@@ -28,4 +29,3 @@ TEST_CASE("unordered_multiset: duplicates") {
   CHECK_EQ(s.erase(1), 2u);
   CHECK_EQ(s.count(1), 0u);
 }
-

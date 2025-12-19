@@ -24,7 +24,7 @@ std::vector<int> shuffled_keys(std::vector<int> keys) {
   return keys;
 }
 
-}  // namespace
+} // namespace
 
 BENCH_CASE("flat_set/build+find_sorted") {
   const auto keys = sorted_keys(n);
@@ -33,12 +33,14 @@ BENCH_CASE("flat_set/build+find_sorted") {
   stl_bench::run_samples("flat_set/build+find (sorted, my-stl)", n, [&] {
     FlatSet<int> s;
     s.reserve(n);
-    for (std::size_t i = 0; i < n; ++i) s.insert(keys[i]);
+    for (std::size_t i = 0; i < n; ++i)
+      s.insert(keys[i]);
 
     std::int64_t sum = 0;
     for (std::size_t i = 0; i < n; ++i) {
       auto it = s.find(lookups[i]);
-      if (it != s.end()) sum += *it;
+      if (it != s.end())
+        sum += *it;
     }
     stl_bench::do_not_optimize(sum);
   });
@@ -50,12 +52,14 @@ BENCH_CASE("flat_set/build+find (std::set)") {
 
   stl_bench::run_samples("flat_set/build+find (sorted, std::set)", n, [&] {
     std::set<int> s;
-    for (std::size_t i = 0; i < n; ++i) s.insert(keys[i]);
+    for (std::size_t i = 0; i < n; ++i)
+      s.insert(keys[i]);
 
     std::int64_t sum = 0;
     for (std::size_t i = 0; i < n; ++i) {
       auto it = s.find(lookups[i]);
-      if (it != s.end()) sum += *it;
+      if (it != s.end())
+        sum += *it;
     }
     stl_bench::do_not_optimize(sum);
   });

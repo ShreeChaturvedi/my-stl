@@ -30,7 +30,8 @@ TEST_CASE("multimap: duplicates and erase_all") {
 
   auto [first, last] = m.equal_range(1);
   int sum = 0;
-  for (auto it = first; it != last; ++it) sum += it->second;
+  for (auto it = first; it != last; ++it)
+    sum += it->second;
   CHECK_EQ(sum, 30);
 
   CHECK_EQ(m.erase_all(1), 2u);
@@ -56,9 +57,9 @@ TEST_CASE("multiset: duplicates") {
 
   auto [first, last] = s.equal_range(1);
   std::size_t count = 0;
-  for (auto it = first; it != last; ++it) ++count;
+  for (auto it = first; it != last; ++it)
+    ++count;
   CHECK_EQ(count, 2u);
 
   CHECK_EQ(s.erase_all(1), 2u);
 }
-

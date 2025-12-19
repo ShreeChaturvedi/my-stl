@@ -4,7 +4,8 @@ basic_string<CharT>::basic_string() noexcept : data_(sso_), size_(0), capacity_(
 }
 
 template <typename CharT>
-basic_string<CharT>::basic_string(const CharT* s) : basic_string(std::basic_string_view<CharT>(s)) {}
+basic_string<CharT>::basic_string(const CharT* s)
+    : basic_string(std::basic_string_view<CharT>(s)) {}
 
 template <typename CharT>
 basic_string<CharT>::basic_string(std::basic_string_view<CharT> sv) : basic_string() {
@@ -31,14 +32,15 @@ basic_string<CharT>::basic_string(basic_string&& other) noexcept : basic_string(
   other.sso_[0] = CharT{};
 }
 
-template <typename CharT>
-basic_string<CharT>::~basic_string() {
-  if (!is_sso()) alloc_.deallocate(data_, capacity_ + 1);
+template <typename CharT> basic_string<CharT>::~basic_string() {
+  if (!is_sso())
+    alloc_.deallocate(data_, capacity_ + 1);
 }
 
 template <typename CharT>
 basic_string<CharT>& basic_string<CharT>::operator=(const basic_string& other) {
-  if (this == &other) return *this;
+  if (this == &other)
+    return *this;
   basic_string tmp(other);
   *this = std::move(tmp);
   return *this;
@@ -46,8 +48,10 @@ basic_string<CharT>& basic_string<CharT>::operator=(const basic_string& other) {
 
 template <typename CharT>
 basic_string<CharT>& basic_string<CharT>::operator=(basic_string&& other) noexcept {
-  if (this == &other) return *this;
-  if (!is_sso()) alloc_.deallocate(data_, capacity_ + 1);
+  if (this == &other)
+    return *this;
+  if (!is_sso())
+    alloc_.deallocate(data_, capacity_ + 1);
   set_sso_empty();
 
   if (other.is_sso()) {
@@ -66,22 +70,19 @@ basic_string<CharT>& basic_string<CharT>::operator=(basic_string&& other) noexce
   return *this;
 }
 
-template <typename CharT>
-void basic_string<CharT>::set_sso_empty() noexcept {
+template <typename CharT> void basic_string<CharT>::set_sso_empty() noexcept {
   data_ = sso_;
   size_ = 0;
   capacity_ = sso_capacity_;
   sso_[0] = CharT{};
 }
 
-template <typename CharT>
-void basic_string<CharT>::clear() noexcept {
+template <typename CharT> void basic_string<CharT>::clear() noexcept {
   size_ = 0;
   data_[0] = CharT{};
 }
 
-template <typename CharT>
-bool basic_string<CharT>::empty() const noexcept {
+template <typename CharT> bool basic_string<CharT>::empty() const noexcept {
   return size_ == 0;
 }
 
@@ -146,70 +147,74 @@ typename basic_string<CharT>::reference basic_string<CharT>::operator[](size_typ
 }
 
 template <typename CharT>
-typename basic_string<CharT>::const_reference basic_string<CharT>::operator[](size_type i) const noexcept {
+typename basic_string<CharT>::const_reference
+basic_string<CharT>::operator[](size_type i) const noexcept {
   return data_[i];
 }
 
 template <typename CharT>
 typename basic_string<CharT>::reference basic_string<CharT>::at(size_type i) {
-  if (i >= size_) throw std::out_of_range("basic_string::at out of range");
+  if (i >= size_)
+    throw std::out_of_range("basic_string::at out of range");
   return data_[i];
 }
 
 template <typename CharT>
 typename basic_string<CharT>::const_reference basic_string<CharT>::at(size_type i) const {
-  if (i >= size_) throw std::out_of_range("basic_string::at out of range");
+  if (i >= size_)
+    throw std::out_of_range("basic_string::at out of range");
   return data_[i];
 }
 
-template <typename CharT>
-typename basic_string<CharT>::reference basic_string<CharT>::front() {
-  if (empty()) throw std::out_of_range("basic_string::front on empty");
+template <typename CharT> typename basic_string<CharT>::reference basic_string<CharT>::front() {
+  if (empty())
+    throw std::out_of_range("basic_string::front on empty");
   return data_[0];
 }
 
 template <typename CharT>
 typename basic_string<CharT>::const_reference basic_string<CharT>::front() const {
-  if (empty()) throw std::out_of_range("basic_string::front on empty");
+  if (empty())
+    throw std::out_of_range("basic_string::front on empty");
   return data_[0];
 }
 
-template <typename CharT>
-typename basic_string<CharT>::reference basic_string<CharT>::back() {
-  if (empty()) throw std::out_of_range("basic_string::back on empty");
+template <typename CharT> typename basic_string<CharT>::reference basic_string<CharT>::back() {
+  if (empty())
+    throw std::out_of_range("basic_string::back on empty");
   return data_[size_ - 1];
 }
 
 template <typename CharT>
 typename basic_string<CharT>::const_reference basic_string<CharT>::back() const {
-  if (empty()) throw std::out_of_range("basic_string::back on empty");
+  if (empty())
+    throw std::out_of_range("basic_string::back on empty");
   return data_[size_ - 1];
 }
 
-template <typename CharT>
-void basic_string<CharT>::reserve(size_type new_capacity) {
-  if (new_capacity <= capacity_) return;
+template <typename CharT> void basic_string<CharT>::reserve(size_type new_capacity) {
+  if (new_capacity <= capacity_)
+    return;
   reallocate(new_capacity);
 }
 
-template <typename CharT>
-void basic_string<CharT>::ensure_capacity_for_one_more() {
-  if (size_ < capacity_) return;
+template <typename CharT> void basic_string<CharT>::ensure_capacity_for_one_more() {
+  if (size_ < capacity_)
+    return;
   const size_type next = capacity_ == 0 ? 1 : (capacity_ + (capacity_ >> 1));
   reallocate(next);
 }
 
-template <typename CharT>
-void basic_string<CharT>::reallocate(size_type new_capacity) {
+template <typename CharT> void basic_string<CharT>::reallocate(size_type new_capacity) {
   pointer next = alloc_.allocate(new_capacity + 1);
   std::copy_n(data_, size_ + 1, next);
-  if (!is_sso()) alloc_.deallocate(data_, capacity_ + 1);
+  if (!is_sso())
+    alloc_.deallocate(data_, capacity_ + 1);
   data_ = next;
   capacity_ = new_capacity;
 }
 
-template <typename CharT>
-void basic_string<CharT>::push_back(CharT ch) {
+template <typename CharT> void basic_string<CharT>::push_back(CharT ch) {
   ensure_capacity_for_one_more();
   data_[size_] = ch;
   ++size_;
@@ -235,13 +240,11 @@ basic_string<CharT>& basic_string<CharT>::operator+=(const basic_string& other) 
   return append(other.view());
 }
 
-template <typename CharT>
-basic_string<CharT>& basic_string<CharT>::operator+=(CharT ch) {
+template <typename CharT> basic_string<CharT>& basic_string<CharT>::operator+=(CharT ch) {
   push_back(ch);
   return *this;
 }
 
-template <typename CharT>
-std::basic_string_view<CharT> basic_string<CharT>::view() const noexcept {
+template <typename CharT> std::basic_string_view<CharT> basic_string<CharT>::view() const noexcept {
   return std::basic_string_view<CharT>(data_, size_);
 }

@@ -8,8 +8,7 @@
 #include <type_traits>
 #include <utility>
 
-template <typename CharT>
-class basic_string {
+template <typename CharT> class basic_string {
 public:
   using value_type = CharT;
   using size_type = std::size_t;
@@ -68,7 +67,9 @@ public:
 
   std::basic_string_view<CharT> view() const noexcept;
 
-  friend bool operator==(const basic_string& a, const basic_string& b) noexcept { return a.view() == b.view(); }
+  friend bool operator==(const basic_string& a, const basic_string& b) noexcept {
+    return a.view() == b.view();
+  }
 
 private:
   static constexpr size_type sso_capacity_ = (23 / sizeof(CharT)) > 0 ? (23 / sizeof(CharT)) : 1;
@@ -79,7 +80,9 @@ private:
   size_type capacity_;
   CharT sso_[sso_capacity_ + 1];
 
-  bool is_sso() const noexcept { return data_ == sso_; }
+  bool is_sso() const noexcept {
+    return data_ == sso_;
+  }
   void set_sso_empty() noexcept;
   void ensure_capacity_for_one_more();
   void reallocate(size_type new_capacity);

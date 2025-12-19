@@ -8,8 +8,7 @@
 #include <utility>
 #include <vector>
 
-template <typename Value, typename KeyOfValue, typename Compare, bool Multi>
-class RbTree {
+template <typename Value, typename KeyOfValue, typename Compare, bool Multi> class RbTree {
 public:
   class iterator;
   class const_iterator;
@@ -23,7 +22,8 @@ public:
   RbTree(const RbTree&) = delete;
   RbTree& operator=(const RbTree&) = delete;
 
-  RbTree(RbTree&& other) noexcept : root_(nullptr), size_(0), comp_(std::move(other.comp_)), key_of_() {
+  RbTree(RbTree&& other) noexcept
+      : root_(nullptr), size_(0), comp_(std::move(other.comp_)), key_of_() {
     root_ = std::exchange(other.root_, nullptr);
     size_ = std::exchange(other.size_, 0);
     blocks_ = std::move(other.blocks_);
@@ -31,7 +31,8 @@ public:
   }
 
   RbTree& operator=(RbTree&& other) noexcept {
-    if (this == &other) return *this;
+    if (this == &other)
+      return *this;
     clear();
     release_blocks();
     root_ = std::exchange(other.root_, nullptr);
@@ -47,16 +48,32 @@ public:
     release_blocks();
   }
 
-  bool empty() const noexcept { return size_ == 0; }
-  size_type size() const noexcept { return size_; }
+  bool empty() const noexcept {
+    return size_ == 0;
+  }
+  size_type size() const noexcept {
+    return size_;
+  }
 
-  iterator begin() noexcept { return iterator(minimum(root_), this); }
-  const_iterator begin() const noexcept { return const_iterator(minimum(root_), this); }
-  const_iterator cbegin() const noexcept { return const_iterator(minimum(root_), this); }
+  iterator begin() noexcept {
+    return iterator(minimum(root_), this);
+  }
+  const_iterator begin() const noexcept {
+    return const_iterator(minimum(root_), this);
+  }
+  const_iterator cbegin() const noexcept {
+    return const_iterator(minimum(root_), this);
+  }
 
-  iterator end() noexcept { return iterator(nullptr, this); }
-  const_iterator end() const noexcept { return const_iterator(nullptr, this); }
-  const_iterator cend() const noexcept { return const_iterator(nullptr, this); }
+  iterator end() noexcept {
+    return iterator(nullptr, this);
+  }
+  const_iterator end() const noexcept {
+    return const_iterator(nullptr, this);
+  }
+  const_iterator cend() const noexcept {
+    return const_iterator(nullptr, this);
+  }
 
   void clear() noexcept {
     destroy_subtree(root_);
@@ -64,30 +81,33 @@ public:
     size_ = 0;
   }
 
-  template <typename Key>
-  iterator find(const Key& key) noexcept {
+  template <typename Key> iterator find(const Key& key) noexcept {
     Node* n = root_;
     while (n) {
-      if (comp_(key, key_of_(n->value))) n = n->left;
-      else if (comp_(key_of_(n->value), key)) n = n->right;
-      else return iterator(n, this);
+      if (comp_(key, key_of_(n->value)))
+        n = n->left;
+      else if (comp_(key_of_(n->value), key))
+        n = n->right;
+      else
+        return iterator(n, this);
     }
     return end();
   }
 
-  template <typename Key>
-  const_iterator find(const Key& key) const noexcept {
+  template <typename Key> const_iterator find(const Key& key) const noexcept {
     const Node* n = root_;
     while (n) {
-      if (comp_(key, key_of_(n->value))) n = n->left;
-      else if (comp_(key_of_(n->value), key)) n = n->right;
-      else return const_iterator(n, this);
+      if (comp_(key, key_of_(n->value)))
+        n = n->left;
+      else if (comp_(key_of_(n->value), key))
+        n = n->right;
+      else
+        return const_iterator(n, this);
     }
     return cend();
   }
 
-  template <typename Key>
-  iterator lower_bound(const Key& key) noexcept {
+  template <typename Key> iterator lower_bound(const Key& key) noexcept {
     Node* curr = root_;
     Node* result = nullptr;
     while (curr) {
@@ -101,8 +121,7 @@ public:
     return iterator(result, this);
   }
 
-  template <typename Key>
-  iterator upper_bound(const Key& key) noexcept {
+  template <typename Key> iterator upper_bound(const Key& key) noexcept {
     Node* curr = root_;
     Node* result = nullptr;
     while (curr) {
@@ -116,8 +135,7 @@ public:
     return iterator(result, this);
   }
 
-  template <typename Key>
-  const_iterator lower_bound(const Key& key) const noexcept {
+  template <typename Key> const_iterator lower_bound(const Key& key) const noexcept {
     const Node* curr = root_;
     const Node* result = nullptr;
     while (curr) {
@@ -131,8 +149,7 @@ public:
     return const_iterator(result, this);
   }
 
-  template <typename Key>
-  const_iterator upper_bound(const Key& key) const noexcept {
+  template <typename Key> const_iterator upper_bound(const Key& key) const noexcept {
     const Node* curr = root_;
     const Node* result = nullptr;
     while (curr) {
@@ -152,9 +169,12 @@ public:
     const auto& k = key_of_(value);
     while (curr) {
       parent = curr;
-      if (comp_(k, key_of_(curr->value))) curr = curr->left;
-      else if (comp_(key_of_(curr->value), k)) curr = curr->right;
-      else return {iterator(curr, this), false};
+      if (comp_(k, key_of_(curr->value)))
+        curr = curr->left;
+      else if (comp_(key_of_(curr->value), k))
+        curr = curr->right;
+      else
+        return {iterator(curr, this), false};
     }
     Node* node = create_node(std::move(value));
     node->parent = parent;
@@ -170,8 +190,10 @@ public:
     const auto& k = key_of_(value);
     while (curr) {
       parent = curr;
-      if (comp_(k, key_of_(curr->value))) curr = curr->left;
-      else curr = curr->right;
+      if (comp_(k, key_of_(curr->value)))
+        curr = curr->left;
+      else
+        curr = curr->right;
     }
     Node* node = create_node(std::move(value));
     node->parent = parent;
@@ -218,26 +240,34 @@ private:
   FreeNode* free_ = nullptr;
 
   static Node* minimum(Node* n) noexcept {
-    if (!n) return nullptr;
-    while (n->left) n = n->left;
+    if (!n)
+      return nullptr;
+    while (n->left)
+      n = n->left;
     return n;
   }
 
   static const Node* minimum(const Node* n) noexcept {
-    if (!n) return nullptr;
-    while (n->left) n = n->left;
+    if (!n)
+      return nullptr;
+    while (n->left)
+      n = n->left;
     return n;
   }
 
   static Node* maximum(Node* n) noexcept {
-    if (!n) return nullptr;
-    while (n->right) n = n->right;
+    if (!n)
+      return nullptr;
+    while (n->right)
+      n = n->right;
     return n;
   }
 
   static Node* successor(Node* n) noexcept {
-    if (!n) return nullptr;
-    if (n->right) return minimum(n->right);
+    if (!n)
+      return nullptr;
+    if (n->right)
+      return minimum(n->right);
     Node* p = n->parent;
     while (p && n == p->right) {
       n = p;
@@ -247,8 +277,10 @@ private:
   }
 
   static Node* predecessor(Node* n) noexcept {
-    if (!n) return nullptr;
-    if (n->left) return maximum(n->left);
+    if (!n)
+      return nullptr;
+    if (n->left)
+      return maximum(n->left);
     Node* p = n->parent;
     while (p && n == p->left) {
       n = p;
@@ -267,7 +299,8 @@ private:
   }
 
   Node* create_node(value_type value) {
-    if (!free_) allocate_block();
+    if (!free_)
+      allocate_block();
     FreeNode* slot = free_;
     free_ = free_->next;
     return std::construct_at(reinterpret_cast<Node*>(slot), std::move(value));
@@ -280,31 +313,41 @@ private:
   }
 
   void release_blocks() noexcept {
-    for (auto* block : blocks_) storage_alloc_.deallocate(block, kBlockSize);
+    for (auto* block : blocks_)
+      storage_alloc_.deallocate(block, kBlockSize);
     blocks_.clear();
     free_ = nullptr;
   }
 
-  void link_node(Node* parent, Node* node, const decltype(key_of_(std::declval<value_type&>()))& k) {
+  void link_node(Node* parent, Node* node,
+                 const decltype(key_of_(std::declval<value_type&>()))& k) {
     if (!parent) {
       root_ = node;
       return;
     }
-    if (comp_(k, key_of_(parent->value))) parent->left = node;
-    else parent->right = node;
+    if (comp_(k, key_of_(parent->value)))
+      parent->left = node;
+    else
+      parent->right = node;
   }
 
-  static Color color_of(Node* n) noexcept { return n ? n->color : Color::Black; }
+  static Color color_of(Node* n) noexcept {
+    return n ? n->color : Color::Black;
+  }
 
   void rotate_left(Node* x) noexcept {
     Node* y = x->right;
     x->right = y->left;
-    if (y->left) y->left->parent = x;
+    if (y->left)
+      y->left->parent = x;
 
     y->parent = x->parent;
-    if (!x->parent) root_ = y;
-    else if (x == x->parent->left) x->parent->left = y;
-    else x->parent->right = y;
+    if (!x->parent)
+      root_ = y;
+    else if (x == x->parent->left)
+      x->parent->left = y;
+    else
+      x->parent->right = y;
 
     y->left = x;
     x->parent = y;
@@ -313,12 +356,16 @@ private:
   void rotate_right(Node* x) noexcept {
     Node* y = x->left;
     x->left = y->right;
-    if (y->right) y->right->parent = x;
+    if (y->right)
+      y->right->parent = x;
 
     y->parent = x->parent;
-    if (!x->parent) root_ = y;
-    else if (x == x->parent->right) x->parent->right = y;
-    else x->parent->left = y;
+    if (!x->parent)
+      root_ = y;
+    else if (x == x->parent->right)
+      x->parent->right = y;
+    else
+      x->parent->left = y;
 
     y->right = x;
     x->parent = y;
@@ -370,10 +417,14 @@ private:
   }
 
   void transplant(Node* u, Node* v) noexcept {
-    if (!u->parent) root_ = v;
-    else if (u == u->parent->left) u->parent->left = v;
-    else u->parent->right = v;
-    if (v) v->parent = u->parent;
+    if (!u->parent)
+      root_ = v;
+    else if (u == u->parent->left)
+      u->parent->left = v;
+    else
+      u->parent->right = v;
+    if (v)
+      v->parent = u->parent;
   }
 
   void erase_node(Node* z) noexcept {
@@ -396,7 +447,8 @@ private:
       x = y->right;
       if (y->parent == z) {
         x_parent = y;
-        if (x) x->parent = y;
+        if (x)
+          x->parent = y;
       } else {
         x_parent = y->parent;
         transplant(y, y->right);
@@ -411,7 +463,8 @@ private:
 
     destroy_node(z);
     --size_;
-    if (y_original == Color::Black) erase_fixup(x, x_parent);
+    if (y_original == Color::Black)
+      erase_fixup(x, x_parent);
   }
 
   void erase_fixup(Node* x, Node* parent) noexcept {
@@ -426,20 +479,28 @@ private:
         }
         if (color_of(w ? w->left : nullptr) == Color::Black &&
             color_of(w ? w->right : nullptr) == Color::Black) {
-          if (w) w->color = Color::Red;
+          if (w)
+            w->color = Color::Red;
           x = parent;
           parent = x ? x->parent : nullptr;
         } else {
           if (color_of(w ? w->right : nullptr) == Color::Black) {
-            if (w && w->left) w->left->color = Color::Black;
-            if (w) w->color = Color::Red;
-            if (w) rotate_right(w);
+            if (w && w->left)
+              w->left->color = Color::Black;
+            if (w)
+              w->color = Color::Red;
+            if (w)
+              rotate_right(w);
             w = parent ? parent->right : nullptr;
           }
-          if (w) w->color = parent ? parent->color : Color::Black;
-          if (parent) parent->color = Color::Black;
-          if (w && w->right) w->right->color = Color::Black;
-          if (parent) rotate_left(parent);
+          if (w)
+            w->color = parent ? parent->color : Color::Black;
+          if (parent)
+            parent->color = Color::Black;
+          if (w && w->right)
+            w->right->color = Color::Black;
+          if (parent)
+            rotate_left(parent);
           x = root_;
           parent = nullptr;
         }
@@ -453,30 +514,40 @@ private:
         }
         if (color_of(w ? w->right : nullptr) == Color::Black &&
             color_of(w ? w->left : nullptr) == Color::Black) {
-          if (w) w->color = Color::Red;
+          if (w)
+            w->color = Color::Red;
           x = parent;
           parent = x ? x->parent : nullptr;
         } else {
           if (color_of(w ? w->left : nullptr) == Color::Black) {
-            if (w && w->right) w->right->color = Color::Black;
-            if (w) w->color = Color::Red;
-            if (w) rotate_left(w);
+            if (w && w->right)
+              w->right->color = Color::Black;
+            if (w)
+              w->color = Color::Red;
+            if (w)
+              rotate_left(w);
             w = parent ? parent->left : nullptr;
           }
-          if (w) w->color = parent ? parent->color : Color::Black;
-          if (parent) parent->color = Color::Black;
-          if (w && w->left) w->left->color = Color::Black;
-          if (parent) rotate_right(parent);
+          if (w)
+            w->color = parent ? parent->color : Color::Black;
+          if (parent)
+            parent->color = Color::Black;
+          if (w && w->left)
+            w->left->color = Color::Black;
+          if (parent)
+            rotate_right(parent);
           x = root_;
           parent = nullptr;
         }
       }
     }
-    if (x) x->color = Color::Black;
+    if (x)
+      x->color = Color::Black;
   }
 
   void destroy_subtree(Node* n) noexcept {
-    if (!n) return;
+    if (!n)
+      return;
     destroy_subtree(n->left);
     destroy_subtree(n->right);
     destroy_node(n);
@@ -493,8 +564,12 @@ public:
 
     iterator() noexcept : node_(nullptr), tree_(nullptr) {}
 
-    reference operator*() const { return node_->value; }
-    pointer operator->() const { return std::addressof(node_->value); }
+    reference operator*() const {
+      return node_->value;
+    }
+    pointer operator->() const {
+      return std::addressof(node_->value);
+    }
 
     iterator& operator++() {
       node_ = successor(node_);
@@ -508,8 +583,10 @@ public:
     }
 
     iterator& operator--() {
-      if (!node_) node_ = maximum(tree_->root_);
-      else node_ = predecessor(node_);
+      if (!node_)
+        node_ = maximum(tree_->root_);
+      else
+        node_ = predecessor(node_);
       return *this;
     }
 
@@ -519,8 +596,12 @@ public:
       return tmp;
     }
 
-    bool operator==(const iterator& other) const { return node_ == other.node_; }
-    bool operator!=(const iterator& other) const { return node_ != other.node_; }
+    bool operator==(const iterator& other) const {
+      return node_ == other.node_;
+    }
+    bool operator!=(const iterator& other) const {
+      return node_ != other.node_;
+    }
 
   private:
     friend class RbTree;
@@ -541,8 +622,12 @@ public:
     const_iterator() noexcept : node_(nullptr), tree_(nullptr) {}
     const_iterator(iterator it) noexcept : node_(it.node_), tree_(it.tree_) {}
 
-    reference operator*() const { return node_->value; }
-    pointer operator->() const { return std::addressof(node_->value); }
+    reference operator*() const {
+      return node_->value;
+    }
+    pointer operator->() const {
+      return std::addressof(node_->value);
+    }
 
     const_iterator& operator++() {
       node_ = successor(const_cast<Node*>(node_));
@@ -556,8 +641,10 @@ public:
     }
 
     const_iterator& operator--() {
-      if (!node_) node_ = maximum(const_cast<Node*>(tree_->root_));
-      else node_ = predecessor(const_cast<Node*>(node_));
+      if (!node_)
+        node_ = maximum(const_cast<Node*>(tree_->root_));
+      else
+        node_ = predecessor(const_cast<Node*>(node_));
       return *this;
     }
 
@@ -567,8 +654,12 @@ public:
       return tmp;
     }
 
-    bool operator==(const const_iterator& other) const { return node_ == other.node_; }
-    bool operator!=(const const_iterator& other) const { return node_ != other.node_; }
+    bool operator==(const const_iterator& other) const {
+      return node_ == other.node_;
+    }
+    bool operator!=(const const_iterator& other) const {
+      return node_ != other.node_;
+    }
 
   private:
     friend class RbTree;

@@ -15,7 +15,8 @@ TEST_CASE("List: push_front/push_back/iteration") {
   CHECK_EQ(xs.back(), 3);
 
   int sum = 0;
-  for (int v : xs) sum += v;
+  for (int v : xs)
+    sum += v;
   CHECK_EQ(sum, 6);
 }
 
@@ -29,4 +30,3 @@ TEST_CASE("List: move_to_front") {
   CHECK_EQ(xs.front(), 2);
   CHECK_EQ(xs.back(), 3);
 }
-

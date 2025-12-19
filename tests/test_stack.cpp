@@ -22,4 +22,3 @@ TEST_CASE("Stack: emplace") {
   s.emplace(3, 'x');
   CHECK_EQ(s.top(), "xxx");
 }
-

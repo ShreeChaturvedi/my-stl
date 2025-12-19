@@ -12,13 +12,14 @@ namespace {
 std::size_t parse_n(std::string_view s) {
   std::size_t n = 0;
   for (char c : s) {
-    if (c < '0' || c > '9') return 0;
+    if (c < '0' || c > '9')
+      return 0;
     n = n * 10 + static_cast<std::size_t>(c - '0');
   }
   return n;
 }
 
-}  // namespace
+} // namespace
 
 int main(int argc, char** argv) {
   std::size_t n = 100'000;
@@ -38,16 +39,20 @@ int main(int argc, char** argv) {
     } else if (arg.starts_with("--n=")) {
       const auto value = arg.substr(std::string_view("--n=").size());
       const auto parsed = parse_n(value);
-      if (parsed != 0) n = parsed;
+      if (parsed != 0)
+        n = parsed;
     } else if (arg == "--n" && i + 1 < argc) {
       const auto parsed = parse_n(argv[++i]);
-      if (parsed != 0) n = parsed;
+      if (parsed != 0)
+        n = parsed;
     } else if (arg.starts_with("--iters=")) {
       const auto parsed = parse_n(arg.substr(std::string_view("--iters=").size()));
-      if (parsed != 0) iters = parsed;
+      if (parsed != 0)
+        iters = parsed;
     } else if (arg == "--iters" && i + 1 < argc) {
       const auto parsed = parse_n(argv[++i]);
-      if (parsed != 0) iters = parsed;
+      if (parsed != 0)
+        iters = parsed;
     } else if (arg.starts_with("--warmup=")) {
       warmup = parse_n(arg.substr(std::string_view("--warmup=").size()));
     } else if (arg == "--warmup" && i + 1 < argc) {
@@ -63,16 +68,19 @@ int main(int argc, char** argv) {
   stl_bench::config().warmup = warmup;
 
   auto& cases = stl_bench::registry();
-  std::sort(cases.begin(), cases.end(), [](const auto& a, const auto& b) { return a.name < b.name; });
+  std::sort(cases.begin(), cases.end(),
+            [](const auto& a, const auto& b) { return a.name < b.name; });
 
   if (list_only) {
-    for (const auto& c : cases) std::cout << c.name << "\n";
+    for (const auto& c : cases)
+      std::cout << c.name << "\n";
     return EXIT_SUCCESS;
   }
 
   std::size_t ran = 0;
   for (const auto& c : cases) {
-    if (!filter.empty() && c.name.find(filter) == std::string_view::npos) continue;
+    if (!filter.empty() && c.name.find(filter) == std::string_view::npos)
+      continue;
     c.fn(n);
     ++ran;
   }

@@ -21,4 +21,3 @@ TEST_CASE("unordered_set: insert/contains/erase") {
   CHECK(!s.contains(1));
   CHECK(!s.erase(1));
 }
-

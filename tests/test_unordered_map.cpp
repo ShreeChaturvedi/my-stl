@@ -19,7 +19,8 @@ TEST_CASE("unordered_map: insert/at/operator[]") {
 
 TEST_CASE("unordered_map: erase") {
   unordered_map<int, int> m;
-  for (int i = 0; i < 100; ++i) m.emplace(i, i * 10);
+  for (int i = 0; i < 100; ++i)
+    m.emplace(i, i * 10);
   CHECK_EQ(m.size(), 100u);
   m.erase(42);
   CHECK_EQ(m.size(), 99u);

@@ -23,4 +23,3 @@ TEST_CASE("string: copy/move") {
   string c = std::move(a);
   CHECK_EQ(c.view(), "abc");
 }
-

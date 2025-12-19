@@ -15,7 +15,7 @@ TEST_CASE("ForwardList: push_front/erase_after") {
   CHECK_EQ(xs.front(), 3);
 
   auto before = xs.before_begin();
-  xs.erase_after(before);  // erase 3
+  xs.erase_after(before); // erase 3
   CHECK_EQ(xs.front(), 2);
 }
 

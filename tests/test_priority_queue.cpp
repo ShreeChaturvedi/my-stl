@@ -13,4 +13,3 @@ TEST_CASE("PriorityQueue: max by default") {
   CHECK_EQ(pq.pop(), 1);
   CHECK(pq.empty());
 }
-

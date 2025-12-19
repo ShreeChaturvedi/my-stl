@@ -20,31 +20,35 @@ std::vector<int> shuffled_keys(std::size_t n) {
   return keys;
 }
 
-}  // namespace
+} // namespace
 
 BENCH_CASE("map/build+find") {
   const auto keys = shuffled_keys(n);
 
   stl_bench::run_samples("map/build+find (my-stl)", n, [&] {
     map<int, int> m;
-    for (std::size_t i = 0; i < n; ++i) m.insert({keys[i], static_cast<int>(i)});
+    for (std::size_t i = 0; i < n; ++i)
+      m.insert({keys[i], static_cast<int>(i)});
 
     std::int64_t sum = 0;
     for (std::size_t i = 0; i < n; ++i) {
       auto it = m.find(keys[i]);
-      if (it != m.end()) sum += it->second;
+      if (it != m.end())
+        sum += it->second;
     }
     stl_bench::do_not_optimize(sum);
   });
 
   stl_bench::run_samples("map/build+find (std::map)", n, [&] {
     std::map<int, int> m;
-    for (std::size_t i = 0; i < n; ++i) m.emplace(keys[i], static_cast<int>(i));
+    for (std::size_t i = 0; i < n; ++i)
+      m.emplace(keys[i], static_cast<int>(i));
 
     std::int64_t sum = 0;
     for (std::size_t i = 0; i < n; ++i) {
       auto it = m.find(keys[i]);
-      if (it != m.end()) sum += it->second;
+      if (it != m.end())
+        sum += it->second;
     }
     stl_bench::do_not_optimize(sum);
   });

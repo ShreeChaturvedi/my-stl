@@ -35,5 +35,6 @@ TEST_CASE("Heap: heap sort matches std::sort") {
 
   Heap<int>::sort(xs);
   CHECK_EQ(xs.size(), ys.size());
-  for (std::size_t i = 0; i < ys.size(); ++i) CHECK_EQ(xs[i], ys[i]);
+  for (std::size_t i = 0; i < ys.size(); ++i)
+    CHECK_EQ(xs[i], ys[i]);
 }

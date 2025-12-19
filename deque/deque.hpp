@@ -7,8 +7,7 @@
 #include <type_traits>
 #include <utility>
 
-template <typename T>
-class Deque {
+template <typename T> class Deque {
 public:
   using value_type = T;
   using size_type = std::size_t;
@@ -70,8 +69,7 @@ private:
   void deallocate() noexcept;
 };
 
-template <typename T>
-class Deque<T>::iterator {
+template <typename T> class Deque<T>::iterator {
 public:
   using value_type = T;
   using difference_type = std::ptrdiff_t;
@@ -81,8 +79,12 @@ public:
 
   iterator() noexcept : deque_(nullptr), index_(0) {}
 
-  reference operator*() const { return (*deque_)[index_]; }
-  pointer operator->() const { return std::addressof(**this); }
+  reference operator*() const {
+    return (*deque_)[index_];
+  }
+  pointer operator->() const {
+    return std::addressof(**this);
+  }
 
   iterator& operator++() {
     ++index_;
@@ -112,20 +114,38 @@ public:
     return *this;
   }
 
-  friend iterator operator+(iterator it, difference_type n) { return it += n; }
-  friend iterator operator-(iterator it, difference_type n) { return it -= n; }
+  friend iterator operator+(iterator it, difference_type n) {
+    return it += n;
+  }
+  friend iterator operator-(iterator it, difference_type n) {
+    return it -= n;
+  }
   friend difference_type operator-(const iterator& a, const iterator& b) {
     return static_cast<difference_type>(a.index_) - static_cast<difference_type>(b.index_);
   }
 
-  reference operator[](difference_type n) const { return (*deque_)[index_ + static_cast<size_type>(n)]; }
+  reference operator[](difference_type n) const {
+    return (*deque_)[index_ + static_cast<size_type>(n)];
+  }
 
-  bool operator==(const iterator& other) const { return deque_ == other.deque_ && index_ == other.index_; }
-  bool operator!=(const iterator& other) const { return !(*this == other); }
-  bool operator<(const iterator& other) const { return index_ < other.index_; }
-  bool operator>(const iterator& other) const { return index_ > other.index_; }
-  bool operator<=(const iterator& other) const { return index_ <= other.index_; }
-  bool operator>=(const iterator& other) const { return index_ >= other.index_; }
+  bool operator==(const iterator& other) const {
+    return deque_ == other.deque_ && index_ == other.index_;
+  }
+  bool operator!=(const iterator& other) const {
+    return !(*this == other);
+  }
+  bool operator<(const iterator& other) const {
+    return index_ < other.index_;
+  }
+  bool operator>(const iterator& other) const {
+    return index_ > other.index_;
+  }
+  bool operator<=(const iterator& other) const {
+    return index_ <= other.index_;
+  }
+  bool operator>=(const iterator& other) const {
+    return index_ >= other.index_;
+  }
 
 private:
   friend class Deque;
@@ -136,8 +156,7 @@ private:
   size_type index_;
 };
 
-template <typename T>
-class Deque<T>::const_iterator {
+template <typename T> class Deque<T>::const_iterator {
 public:
   using value_type = const T;
   using difference_type = std::ptrdiff_t;
@@ -148,8 +167,12 @@ public:
   const_iterator() noexcept : deque_(nullptr), index_(0) {}
   const_iterator(iterator it) noexcept : deque_(it.deque_), index_(it.index_) {}
 
-  reference operator*() const { return (*deque_)[index_]; }
-  pointer operator->() const { return std::addressof(**this); }
+  reference operator*() const {
+    return (*deque_)[index_];
+  }
+  pointer operator->() const {
+    return std::addressof(**this);
+  }
 
   const_iterator& operator++() {
     ++index_;
@@ -179,20 +202,38 @@ public:
     return *this;
   }
 
-  friend const_iterator operator+(const_iterator it, difference_type n) { return it += n; }
-  friend const_iterator operator-(const_iterator it, difference_type n) { return it -= n; }
+  friend const_iterator operator+(const_iterator it, difference_type n) {
+    return it += n;
+  }
+  friend const_iterator operator-(const_iterator it, difference_type n) {
+    return it -= n;
+  }
   friend difference_type operator-(const const_iterator& a, const const_iterator& b) {
     return static_cast<difference_type>(a.index_) - static_cast<difference_type>(b.index_);
   }
 
-  reference operator[](difference_type n) const { return (*deque_)[index_ + static_cast<size_type>(n)]; }
+  reference operator[](difference_type n) const {
+    return (*deque_)[index_ + static_cast<size_type>(n)];
+  }
 
-  bool operator==(const const_iterator& other) const { return deque_ == other.deque_ && index_ == other.index_; }
-  bool operator!=(const const_iterator& other) const { return !(*this == other); }
-  bool operator<(const const_iterator& other) const { return index_ < other.index_; }
-  bool operator>(const const_iterator& other) const { return index_ > other.index_; }
-  bool operator<=(const const_iterator& other) const { return index_ <= other.index_; }
-  bool operator>=(const const_iterator& other) const { return index_ >= other.index_; }
+  bool operator==(const const_iterator& other) const {
+    return deque_ == other.deque_ && index_ == other.index_;
+  }
+  bool operator!=(const const_iterator& other) const {
+    return !(*this == other);
+  }
+  bool operator<(const const_iterator& other) const {
+    return index_ < other.index_;
+  }
+  bool operator>(const const_iterator& other) const {
+    return index_ > other.index_;
+  }
+  bool operator<=(const const_iterator& other) const {
+    return index_ <= other.index_;
+  }
+  bool operator>=(const const_iterator& other) const {
+    return index_ >= other.index_;
+  }
 
 private:
   friend class Deque;
@@ -203,4 +244,3 @@ private:
 };
 
 #include "deque.tpp"
-

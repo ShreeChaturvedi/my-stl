@@ -16,4 +16,3 @@ TEST_CASE("Queue: push/front/pop") {
   q.pop();
   CHECK_EQ(q.front(), 2);
 }
-

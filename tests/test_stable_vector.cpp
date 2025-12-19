@@ -46,4 +46,3 @@ TEST_CASE("StableVector: copy is deep") {
   CHECK(&ys[0] != &xs[0]);
   CHECK(&ys[1] != &xs[1]);
 }
-

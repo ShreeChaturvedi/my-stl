@@ -6,8 +6,7 @@
 #include <type_traits>
 #include <utility>
 
-template <typename T>
-class List {
+template <typename T> class List {
 public:
   class iterator;
   class const_iterator;
@@ -65,16 +64,19 @@ private:
   NodeBase sentinel_;
   std::size_t size_;
 
-  static Node* as_node(NodeBase* p) { return static_cast<Node*>(p); }
-  static const Node* as_node(const NodeBase* p) { return static_cast<const Node*>(p); }
+  static Node* as_node(NodeBase* p) {
+    return static_cast<Node*>(p);
+  }
+  static const Node* as_node(const NodeBase* p) {
+    return static_cast<const Node*>(p);
+  }
 
   static void link_between(NodeBase* node, NodeBase* before, NodeBase* after) noexcept;
   static void unlink(NodeBase* node) noexcept;
   void steal(List&& other) noexcept;
 };
 
-template <typename T>
-class List<T>::iterator {
+template <typename T> class List<T>::iterator {
 public:
   using value_type = T;
   using difference_type = std::ptrdiff_t;
@@ -84,8 +86,12 @@ public:
 
   iterator() noexcept : node_(nullptr) {}
 
-  reference operator*() const { return List::as_node(node_)->value; }
-  pointer operator->() const { return std::addressof(operator*()); }
+  reference operator*() const {
+    return List::as_node(node_)->value;
+  }
+  pointer operator->() const {
+    return std::addressof(operator*());
+  }
 
   iterator& operator++() {
     node_ = node_->next;
@@ -109,8 +115,12 @@ public:
     return tmp;
   }
 
-  bool operator==(const iterator& other) const { return node_ == other.node_; }
-  bool operator!=(const iterator& other) const { return node_ != other.node_; }
+  bool operator==(const iterator& other) const {
+    return node_ == other.node_;
+  }
+  bool operator!=(const iterator& other) const {
+    return node_ != other.node_;
+  }
 
 private:
   friend class List;
@@ -119,8 +129,7 @@ private:
   NodeBase* node_;
 };
 
-template <typename T>
-class List<T>::const_iterator {
+template <typename T> class List<T>::const_iterator {
 public:
   using value_type = const T;
   using difference_type = std::ptrdiff_t;
@@ -131,8 +140,12 @@ public:
   const_iterator() noexcept : node_(nullptr) {}
   const_iterator(iterator it) noexcept : node_(it.node_) {}
 
-  reference operator*() const { return List::as_node(node_)->value; }
-  pointer operator->() const { return std::addressof(operator*()); }
+  reference operator*() const {
+    return List::as_node(node_)->value;
+  }
+  pointer operator->() const {
+    return std::addressof(operator*());
+  }
 
   const_iterator& operator++() {
     node_ = node_->next;
@@ -156,8 +169,12 @@ public:
     return tmp;
   }
 
-  bool operator==(const const_iterator& other) const { return node_ == other.node_; }
-  bool operator!=(const const_iterator& other) const { return node_ != other.node_; }
+  bool operator==(const const_iterator& other) const {
+    return node_ == other.node_;
+  }
+  bool operator!=(const const_iterator& other) const {
+    return node_ != other.node_;
+  }
 
 private:
   friend class List;

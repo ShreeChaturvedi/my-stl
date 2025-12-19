@@ -54,4 +54,3 @@ TEST_CASE("FlatMap: operator[]/at/erase") {
 
   CHECK_THROWS(m.at(2));
 }
-

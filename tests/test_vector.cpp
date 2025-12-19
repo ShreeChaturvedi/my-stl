@@ -7,7 +7,8 @@
 TEST_CASE("Vector: push_back/size/index") {
   Vector<int> xs;
   CHECK(xs.empty());
-  for (int i = 0; i < 100; ++i) xs.push_back(i);
+  for (int i = 0; i < 100; ++i)
+    xs.push_back(i);
   CHECK_EQ(xs.size(), 100u);
   CHECK_EQ(xs[0], 0);
   CHECK_EQ(xs[99], 99);
@@ -82,7 +83,7 @@ struct MoveOnlyNoAssign {
   MoveOnlyNoAssign(MoveOnlyNoAssign&&) noexcept = default;
   MoveOnlyNoAssign& operator=(MoveOnlyNoAssign&&) = delete;
 };
-}  // namespace
+} // namespace
 
 TEST_CASE("Vector: insert/erase without assignment") {
   Vector<MoveOnlyNoAssign> xs;
@@ -104,4 +105,6 @@ TEST_CASE("Vector: insert/erase without assignment") {
   CHECK_THROWS(xs.erase(xs.end()));
 }
 
-TEST_CASE("Vector: at throws") { CHECK_THROWS((Vector<int>{1, 2, 3}.at(99))); }
+TEST_CASE("Vector: at throws") {
+  CHECK_THROWS((Vector<int>{1, 2, 3}.at(99)));
+}

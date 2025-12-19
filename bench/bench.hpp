@@ -36,11 +36,12 @@ inline std::vector<BenchCase>& registry() {
 }
 
 struct Registrar final {
-  explicit Registrar(std::string_view name, void (*fn)(std::size_t n)) { registry().push_back({name, fn}); }
+  explicit Registrar(std::string_view name, void (*fn)(std::size_t n)) {
+    registry().push_back({name, fn});
+  }
 };
 
-template <typename T>
-inline void do_not_optimize(T&& value) {
+template <typename T> inline void do_not_optimize(T&& value) {
 #if defined(__clang__) || defined(__GNUC__)
   asm volatile("" : : "g"(value) : "memory");
 #else
@@ -54,8 +55,7 @@ inline void clobber_memory() {
 #endif
 }
 
-template <typename Fn>
-inline std::chrono::nanoseconds time_it(Fn&& fn) {
+template <typename Fn> inline std::chrono::nanoseconds time_it(Fn&& fn) {
   do_not_optimize(0);
   clobber_memory();
   const auto start = clock::now();
@@ -67,11 +67,14 @@ inline std::chrono::nanoseconds time_it(Fn&& fn) {
 
 inline void report(std::string_view name, std::size_t n, std::chrono::nanoseconds ns) {
   const double ns_per_op = n == 0 ? 0.0 : static_cast<double>(ns.count()) / static_cast<double>(n);
-  std::cout << name << ": " << ns.count() << " ns total (" << ns_per_op << " ns/op, n=" << n << ")\n";
+  std::cout << name << ": " << ns.count() << " ns total (" << ns_per_op << " ns/op, n=" << n
+            << ")\n";
 }
 
-inline void report_samples(std::string_view name, std::size_t n, std::vector<std::chrono::nanoseconds> samples) {
-  if (samples.empty()) return;
+inline void report_samples(std::string_view name, std::size_t n,
+                           std::vector<std::chrono::nanoseconds> samples) {
+  if (samples.empty())
+    return;
   std::sort(samples.begin(), samples.end());
 
   const auto min = samples.front();
@@ -82,7 +85,8 @@ inline void report_samples(std::string_view name, std::size_t n, std::vector<std
   const auto mean = total / static_cast<std::int64_t>(samples.size());
 
   const auto fmt = [&](std::chrono::nanoseconds ns) {
-    const double ns_per_op = n == 0 ? 0.0 : static_cast<double>(ns.count()) / static_cast<double>(n);
+    const double ns_per_op =
+        n == 0 ? 0.0 : static_cast<double>(ns.count()) / static_cast<double>(n);
     std::cout << ns.count() << " ns (" << ns_per_op << " ns/op)";
   };
 
@@ -98,24 +102,25 @@ inline void report_samples(std::string_view name, std::size_t n, std::vector<std
   std::cout << "\n";
 }
 
-template <typename Fn>
-inline void run_samples(std::string_view name, std::size_t n, Fn&& fn) {
-  for (std::size_t i = 0; i < config().warmup; ++i) std::forward<Fn>(fn)();
+template <typename Fn> inline void run_samples(std::string_view name, std::size_t n, Fn&& fn) {
+  for (std::size_t i = 0; i < config().warmup; ++i)
+    std::forward<Fn>(fn)();
 
   std::vector<std::chrono::nanoseconds> samples;
   samples.reserve(config().iters);
-  for (std::size_t i = 0; i < config().iters; ++i) samples.push_back(time_it(fn));
+  for (std::size_t i = 0; i < config().iters; ++i)
+    samples.push_back(time_it(fn));
 
   report_samples(name, n, std::move(samples));
 }
 
-}  // namespace stl_bench
+} // namespace stl_bench
 
 #define STL_BENCH_CONCAT_INNER(a, b) a##b
 #define STL_BENCH_CONCAT(a, b) STL_BENCH_CONCAT_INNER(a, b)
 
-#define BENCH_CASE(name_literal)                                                                     \
-  static void STL_BENCH_CONCAT(bench_fn_, __LINE__)(std::size_t n);                                   \
-  static ::stl_bench::Registrar STL_BENCH_CONCAT(bench_registrar_, __LINE__)(                         \
-      name_literal, &STL_BENCH_CONCAT(bench_fn_, __LINE__));                                          \
+#define BENCH_CASE(name_literal)                                                                   \
+  static void STL_BENCH_CONCAT(bench_fn_, __LINE__)(std::size_t n);                                \
+  static ::stl_bench::Registrar STL_BENCH_CONCAT(bench_registrar_, __LINE__)(                      \
+      name_literal, &STL_BENCH_CONCAT(bench_fn_, __LINE__));                                       \
   static void STL_BENCH_CONCAT(bench_fn_, __LINE__)(std::size_t n)
