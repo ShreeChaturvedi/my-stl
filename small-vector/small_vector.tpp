@@ -139,7 +139,7 @@ void SmallVector<T, InlineCapacity>::clear() noexcept {
 template <typename T, std::size_t InlineCapacity>
 void SmallVector<T, InlineCapacity>::grow_to(size_type new_capacity) {
   T* new_data = allocate(new_capacity);
-  if constexpr (std::is_trivially_copyable_v<T>) {
+  if constexpr (std::is_trivially_copyable_v<T> && std::is_trivially_copy_assignable_v<T>) {
     if (size_ > 0) std::memcpy(new_data, data_, size_ * sizeof(T));
   } else if constexpr (std::is_nothrow_move_constructible_v<T>) {
     std::uninitialized_move_n(data_, size_, new_data);
