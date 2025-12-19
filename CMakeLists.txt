@@ -74,6 +74,52 @@ target_link_libraries(stl_tests PRIVATE stl Catch2::Catch2WithMain)
 include(Catch)
 catch_discover_tests(stl_tests)
 
+find_package(Doxygen QUIET)
+if (DOXYGEN_FOUND)
+  set(DOXYGEN_PROJECT_NAME "my-stl")
+  set(DOXYGEN_PROJECT_BRIEF "C++23 build-your-own STL")
+  set(DOXYGEN_OUTPUT_DIR "${CMAKE_CURRENT_SOURCE_DIR}/docs/doxygen")
+  set(DOXYGEN_INPUT_DIRS
+    "${CMAKE_CURRENT_SOURCE_DIR}/array-list"
+    "${CMAKE_CURRENT_SOURCE_DIR}/linked-list"
+    "${CMAKE_CURRENT_SOURCE_DIR}/ring-buffer"
+    "${CMAKE_CURRENT_SOURCE_DIR}/vector"
+    "${CMAKE_CURRENT_SOURCE_DIR}/unordered-map"
+    "${CMAKE_CURRENT_SOURCE_DIR}/heap"
+    "${CMAKE_CURRENT_SOURCE_DIR}/trie"
+    "${CMAKE_CURRENT_SOURCE_DIR}/unique-ptr"
+    "${CMAKE_CURRENT_SOURCE_DIR}/lru-cache"
+    "${CMAKE_CURRENT_SOURCE_DIR}/forward-list"
+    "${CMAKE_CURRENT_SOURCE_DIR}/stack"
+    "${CMAKE_CURRENT_SOURCE_DIR}/priority-queue"
+    "${CMAKE_CURRENT_SOURCE_DIR}/list"
+    "${CMAKE_CURRENT_SOURCE_DIR}/queue"
+    "${CMAKE_CURRENT_SOURCE_DIR}/span"
+    "${CMAKE_CURRENT_SOURCE_DIR}/utility"
+    "${CMAKE_CURRENT_SOURCE_DIR}/rb-tree"
+    "${CMAKE_CURRENT_SOURCE_DIR}/map"
+    "${CMAKE_CURRENT_SOURCE_DIR}/set"
+    "${CMAKE_CURRENT_SOURCE_DIR}/unordered-set"
+    "${CMAKE_CURRENT_SOURCE_DIR}/unordered-multimap"
+    "${CMAKE_CURRENT_SOURCE_DIR}/unordered-multiset"
+    "${CMAKE_CURRENT_SOURCE_DIR}/deque"
+    "${CMAKE_CURRENT_SOURCE_DIR}/string"
+    "${CMAKE_CURRENT_SOURCE_DIR}/flat-map"
+    "${CMAKE_CURRENT_SOURCE_DIR}/flat-set"
+    "${CMAKE_CURRENT_SOURCE_DIR}/small-vector"
+    "${CMAKE_CURRENT_SOURCE_DIR}/stable-vector"
+  )
+  list(JOIN DOXYGEN_INPUT_DIRS " " DOXYGEN_INPUT_DIRS)
+  configure_file("${CMAKE_CURRENT_SOURCE_DIR}/Doxyfile.in"
+                 "${CMAKE_CURRENT_BINARY_DIR}/Doxyfile" @ONLY)
+  add_custom_target(doxygen
+    COMMAND "${DOXYGEN_EXECUTABLE}" "${CMAKE_CURRENT_BINARY_DIR}/Doxyfile"
+    WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
+    COMMENT "Generating API documentation with Doxygen"
+    VERBATIM
+  )
+endif()
+
 add_executable(stl_bench
   bench/bench_main.cpp
   bench/bench_deque.cpp

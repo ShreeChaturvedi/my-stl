@@ -11,6 +11,7 @@
 !docs/
 !docs/**
 !CMakeLists.txt
+!Doxyfile.in
 !tests/
 !tests/**
 !bench/
@@ -71,6 +72,9 @@
 !small-vector/**
 !stable-vector/
 !stable-vector/**
+
+# Generated docs
+docs/doxygen/
 
 # Build artifacts
 build*/

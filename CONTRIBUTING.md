@@ -26,6 +26,11 @@ ctest --test-dir build --output-on-failure
 - Match existing style in the module you touch.
 - Add tests for new behavior or bug fixes.
 
+## Documentation
+
+- Public APIs should include Doxygen-friendly comments where appropriate.
+- Generate API docs with `cmake --build build --target doxygen` (requires Doxygen).
+
 ## Benchmarking
 
 If you change performance-sensitive code:

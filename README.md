@@ -95,6 +95,7 @@ Detailed methodology and scripts: `docs/benchmarks.md` and `scripts/bench/`.
 
 - `docs/containers/README.md` -- per-container notes, complexity, differences vs `std::`
 - `docs/benchmarks.md` -- benchmark methodology and results
+- API docs (Doxygen): `cmake --build build --target doxygen`
 
 ## Contributing
 
