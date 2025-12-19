@@ -17,6 +17,7 @@ Each page describes API surface, invariants, complexity, and known differences v
 - `Queue<T>` -- `queue.md`
 - `set<K>` -- `set.md`
 - `SmallVector<T, N>` -- `small_vector.md`
+- `StableVector<T>` -- `stable_vector.md`
 - `Stack<T>` -- `stack.md`
 - `unordered_map<K, V>` -- `unordered_map.md`
 - `unordered_set<K>` -- `unordered_set.md`
