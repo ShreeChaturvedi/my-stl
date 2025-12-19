@@ -1,0 +1,86 @@
+{
+  "meta": {
+    "timestamp": "2025-12-19T17:09:03.475881+00:00",
+    "platform": "macOS-15.5-arm64-arm-64bit-Mach-O",
+    "cpu": "Apple M2",
+    "compiler": "Apple clang version 17.0.0 (clang-1700.0.13.5)",
+    "python": "3.14.0",
+    "bench_args": {
+      "n": 200000,
+      "iters": 5,
+      "warmup": 1,
+      "filter": ""
+    },
+    "git_sha": "a1bef1b056ca508f48c3c925c792381613a60fb5",
+    "git_dirty": false,
+    "cmake_build_type": "Release",
+    "cxx_compiler": "/usr/bin/c++",
+    "cxx_flags_release": "-O3 -DNDEBUG"
+  },
+  "run": "docs/benchmarks/runs/bench-20251219-120903-m2.json",
+  "pairs": [
+    {
+      "case_id": "vector_push_back_no_reserve",
+      "title": "Vector push_back (no reserve)",
+      "n": 200000,
+      "iters": 5,
+      "mini_median_ns_per_op": 0.929585,
+      "std_median_ns_per_op": 0.683335,
+      "ratio_mini_vs_std": 1.3603649747195738
+    },
+    {
+      "case_id": "vector_push_back_reserve",
+      "title": "Vector push_back (reserve)",
+      "n": 200000,
+      "iters": 5,
+      "mini_median_ns_per_op": 0.4425,
+      "std_median_ns_per_op": 0.441875,
+      "ratio_mini_vs_std": 1.0014144271570014
+    },
+    {
+      "case_id": "unordered_map_emplace_reserve",
+      "title": "unordered_map emplace (reserve)",
+      "n": 200000,
+      "iters": 5,
+      "mini_median_ns_per_op": 49.5915,
+      "std_median_ns_per_op": 41.2973,
+      "ratio_mini_vs_std": 1.2008412172224334
+    },
+    {
+      "case_id": "flat_map_build_find",
+      "title": "flat_map build+find",
+      "n": 200000,
+      "iters": 5,
+      "mini_median_ns_per_op": 10188.5,
+      "std_median_ns_per_op": 217.557,
+      "ratio_mini_vs_std": 46.83140510303047
+    },
+    {
+      "case_id": "flat_set_build_find",
+      "title": "flat_set build+find",
+      "n": 200000,
+      "iters": 5,
+      "mini_median_ns_per_op": 5005.51,
+      "std_median_ns_per_op": 195.182,
+      "ratio_mini_vs_std": 25.64534639464705
+    },
+    {
+      "case_id": "small_vector_push_back",
+      "title": "small_vector push_back",
+      "n": 200000,
+      "iters": 5,
+      "mini_median_ns_per_op": 1.03729,
+      "std_median_ns_per_op": 0.642915,
+      "ratio_mini_vs_std": 1.6134170146909002
+    },
+    {
+      "case_id": "stable_vector_push_back",
+      "title": "stable_vector push_back",
+      "n": 200000,
+      "iters": 5,
+      "mini_median_ns_per_op": 16.395,
+      "std_median_ns_per_op": 14.6775,
+      "ratio_mini_vs_std": 1.1170158405723045
+    }
+  ]
+}
