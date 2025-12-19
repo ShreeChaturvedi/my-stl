@@ -37,6 +37,12 @@ PAIRINGS = [
         "std": "map/build+find (std::map)",
     },
     {
+        "id": "set_build_find",
+        "title": "set build+find",
+        "mini": "set/build+find (my-stl)",
+        "std": "set/build+find (std::set)",
+    },
+    {
         "id": "flat_map_build_find",
         "title": "flat_map build+find",
         "mini": "flat_map/build+find (mini-stl)",
