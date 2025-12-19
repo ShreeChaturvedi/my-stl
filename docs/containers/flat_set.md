@@ -6,6 +6,7 @@ A sorted vector-backed set optimized for cache locality.
 
 - Stores sorted keys in a `Vector`.
 - Fast iteration and binary-search lookups.
+- Optimized for sorted insert patterns (fast append path).
 
 ## API Notes
 

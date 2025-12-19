@@ -17,6 +17,18 @@ typename FlatSet<Key, Compare>::const_iterator FlatSet<Key, Compare>::lower_boun
 template <typename Key, typename Compare>
 std::pair<typename FlatSet<Key, Compare>::iterator, bool> FlatSet<Key, Compare>::insert(
     const Key& key) {
+  if (data_.empty()) {
+    data_.push_back(key);
+    return {data_.end() - 1, true};
+  }
+
+  const auto& last_key = data_.back();
+  if (keys_equal(comp_, last_key, key)) return {data_.end() - 1, false};
+  if (comp_(last_key, key)) {
+    data_.push_back(key);
+    return {data_.end() - 1, true};
+  }
+
   auto it = lower_bound(key);
   if (it != end() && keys_equal(comp_, *it, key)) return {it, false};
   it = data_.insert(it, key);
@@ -25,6 +37,18 @@ std::pair<typename FlatSet<Key, Compare>::iterator, bool> FlatSet<Key, Compare>:
 
 template <typename Key, typename Compare>
 std::pair<typename FlatSet<Key, Compare>::iterator, bool> FlatSet<Key, Compare>::insert(Key&& key) {
+  if (data_.empty()) {
+    data_.push_back(std::move(key));
+    return {data_.end() - 1, true};
+  }
+
+  const auto& last_key = data_.back();
+  if (keys_equal(comp_, last_key, key)) return {data_.end() - 1, false};
+  if (comp_(last_key, key)) {
+    data_.push_back(std::move(key));
+    return {data_.end() - 1, true};
+  }
+
   auto it = lower_bound(key);
   if (it != end() && keys_equal(comp_, *it, key)) return {it, false};
   it = data_.insert(it, std::move(key));
@@ -53,4 +77,3 @@ typename FlatSet<Key, Compare>::size_type FlatSet<Key, Compare>::erase(const Key
   data_.erase(it);
   return 1;
 }
-

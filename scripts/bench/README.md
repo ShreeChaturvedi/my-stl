@@ -20,7 +20,8 @@ Outputs:
 
 - `docs/benchmarks/bench_summary.json`
 - `docs/benchmarks/bench_summary.csv`
-- `docs/benchmarks/charts/ratio.svg`
+- `docs/benchmarks/charts/ratio-light.svg`
+- `docs/benchmarks/charts/ratio-dark.svg`
 
 ## Notes
 

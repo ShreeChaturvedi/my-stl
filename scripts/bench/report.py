@@ -45,14 +45,14 @@ PAIRINGS = [
     {
         "id": "flat_map_build_find",
         "title": "flat_map build+find",
-        "mini": "flat_map/build+find (mini-stl)",
-        "std": "flat_map/build+find (std::map)",
+        "mini": "flat_map/build+find (sorted, my-stl)",
+        "std": "flat_map/build+find (sorted, std::map)",
     },
     {
         "id": "flat_set_build_find",
         "title": "flat_set build+find",
-        "mini": "flat_set/build+find (mini-stl)",
-        "std": "flat_set/build+find (std::set)",
+        "mini": "flat_set/build+find (sorted, my-stl)",
+        "std": "flat_set/build+find (sorted, std::set)",
     },
     {
         "id": "small_vector_push_back",
@@ -111,7 +111,7 @@ def write_csv(rows: list[dict], out_path: Path) -> None:
     out_path.write_text("\n".join(lines) + "\n")
 
 
-def svg_ratio_chart(rows: list[dict], out_path: Path) -> None:
+def svg_ratio_chart(rows: list[dict], out_path: Path, *, theme: dict[str, str]) -> None:
     width = 900
     row_h = 28
     top = 40
@@ -130,11 +130,12 @@ def svg_ratio_chart(rows: list[dict], out_path: Path) -> None:
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" '
         f'viewBox="0 0 {width} {height}" role="img">',
         '<style>'
-        'text{font-family:Arial, sans-serif;font-size:12px;fill:#222;}'
-        '.axis{stroke:#666;stroke-width:1;}'
-        '.bar{fill:#2f6f8f;}'
-        '.baseline{stroke:#c23a3a;stroke-width:1;stroke-dasharray:4 4;}'
+        f'text{{font-family:Arial, sans-serif;font-size:12px;fill:{theme["text"]};}}'
+        f'.axis{{stroke:{theme["axis"]};stroke-width:1;}}'
+        f'.bar{{fill:{theme["bar"]};}}'
+        f'.baseline{{stroke:{theme["baseline"]};stroke-width:1;stroke-dasharray:4 4;}}'
         "</style>",
+        f'<rect width="100%" height="100%" fill="{theme["background"]}"/>',
         f'<text x="{left}" y="20">Median ns/op ratio (my-stl / std). Lower is better.</text>',
         f'<line class="axis" x1="{left}" y1="{top-6}" x2="{left}" y2="{height-20}"/>',
     ]
@@ -196,7 +197,28 @@ def main() -> int:
 
     (out_dir / "bench_summary.json").write_text(json.dumps(summary_json, indent=2))
     write_csv(rows, out_dir / "bench_summary.csv")
-    svg_ratio_chart(rows, out_dir / "charts" / "ratio.svg")
+    svg_ratio_chart(
+        rows,
+        out_dir / "charts" / "ratio-light.svg",
+        theme={
+            "text": "#24292f",
+            "axis": "#57606a",
+            "bar": "#2f6f8f",
+            "baseline": "#c23a3a",
+            "background": "#ffffff",
+        },
+    )
+    svg_ratio_chart(
+        rows,
+        out_dir / "charts" / "ratio-dark.svg",
+        theme={
+            "text": "#e6edf3",
+            "axis": "#8b949e",
+            "bar": "#58a6ff",
+            "baseline": "#f85149",
+            "background": "#0d1117",
+        },
+    )
     return 0
 
 

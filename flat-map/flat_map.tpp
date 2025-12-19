@@ -21,6 +21,18 @@ typename FlatMap<Key, T, Compare>::const_iterator FlatMap<Key, T, Compare>::lowe
 template <typename Key, typename T, typename Compare>
 std::pair<typename FlatMap<Key, T, Compare>::iterator, bool> FlatMap<Key, T, Compare>::insert(
     const value_type& value) {
+  if (data_.empty()) {
+    data_.push_back(value);
+    return {data_.end() - 1, true};
+  }
+
+  const auto& last_key = data_.back().first;
+  if (keys_equal(comp_, last_key, value.first)) return {data_.end() - 1, false};
+  if (comp_(last_key, value.first)) {
+    data_.push_back(value);
+    return {data_.end() - 1, true};
+  }
+
   auto it = lower_bound(value.first);
   if (it != end() && keys_equal(comp_, it->first, value.first)) return {it, false};
   it = data_.insert(it, value);
@@ -31,6 +43,18 @@ template <typename Key, typename T, typename Compare>
 std::pair<typename FlatMap<Key, T, Compare>::iterator, bool> FlatMap<Key, T, Compare>::insert(
     value_type&& value) {
   const Key& key = value.first;
+  if (data_.empty()) {
+    data_.push_back(std::move(value));
+    return {data_.end() - 1, true};
+  }
+
+  const auto& last_key = data_.back().first;
+  if (keys_equal(comp_, last_key, key)) return {data_.end() - 1, false};
+  if (comp_(last_key, key)) {
+    data_.push_back(std::move(value));
+    return {data_.end() - 1, true};
+  }
+
   auto it = lower_bound(key);
   if (it != end() && keys_equal(comp_, it->first, key)) return {it, false};
   it = data_.insert(it, std::move(value));
@@ -50,6 +74,18 @@ template <typename... Args>
 std::pair<typename FlatMap<Key, T, Compare>::iterator, bool> FlatMap<Key, T, Compare>::try_emplace(
     const Key& key,
     Args&&... args) {
+  if (data_.empty()) {
+    data_.emplace_back(key, T(std::forward<Args>(args)...));
+    return {data_.end() - 1, true};
+  }
+
+  const auto& last_key = data_.back().first;
+  if (keys_equal(comp_, last_key, key)) return {data_.end() - 1, false};
+  if (comp_(last_key, key)) {
+    data_.emplace_back(key, T(std::forward<Args>(args)...));
+    return {data_.end() - 1, true};
+  }
+
   auto it = lower_bound(key);
   if (it != end() && keys_equal(comp_, it->first, key)) return {it, false};
   it = data_.emplace(it, key, T(std::forward<Args>(args)...));
@@ -97,6 +133,18 @@ T& FlatMap<Key, T, Compare>::operator[](const Key& key) {
 template <typename Key, typename T, typename Compare>
 T& FlatMap<Key, T, Compare>::operator[](Key&& key) {
   static_assert(std::is_default_constructible_v<T>, "FlatMap::operator[] requires default constructible T");
+  if (data_.empty()) {
+    data_.emplace_back(std::move(key), T{});
+    return data_.back().second;
+  }
+
+  const auto& last_key = data_.back().first;
+  if (keys_equal(comp_, last_key, key)) return data_.back().second;
+  if (comp_(last_key, key)) {
+    data_.emplace_back(std::move(key), T{});
+    return data_.back().second;
+  }
+
   auto it = lower_bound(key);
   if (it != end() && keys_equal(comp_, it->first, key)) return it->second;
   it = data_.emplace(it, std::move(key), T{});
@@ -110,4 +158,3 @@ typename FlatMap<Key, T, Compare>::size_type FlatMap<Key, T, Compare>::erase(con
   data_.erase(it);
   return 1;
 }
-
