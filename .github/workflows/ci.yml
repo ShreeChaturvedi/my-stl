@@ -19,7 +19,7 @@ jobs:
         run: cmake -S . -B build -DCMAKE_BUILD_TYPE=Release -DSTL_ENABLE_WERROR=ON
 
       - name: Build
-        run: cmake --build build -j
+        run: cmake --build build -j --config Release
 
       - name: Test
-        run: ctest --test-dir build --output-on-failure
+        run: ctest --test-dir build --output-on-failure -C Release
