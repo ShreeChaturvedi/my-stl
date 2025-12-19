@@ -13,6 +13,7 @@ Each page describes API surface, invariants, complexity, and known differences v
 - `LinkedList<T>` -- `linked_list.md`
 - `List<T>` -- `list.md`
 - `map<K, V>` -- `map.md`
+- `LRUCache<K, V>` -- `lru_cache.md`
 - `PriorityQueue<T>` -- `priority_queue.md`
 - `Queue<T>` -- `queue.md`
 - `set<K>` -- `set.md`
