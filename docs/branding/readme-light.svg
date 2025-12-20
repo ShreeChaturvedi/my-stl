@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="200" viewBox="0 0 900 200" role="img">
+<defs>
+  <linearGradient id="hexGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+    <stop offset="0%" stop-color="#2b6cb0"/>
+    <stop offset="100%" stop-color="#0b2f5b"/>
+  </linearGradient>
+  <linearGradient id="hexHighlight" x1="0%" y1="0%" x2="0%" y2="100%">
+    <stop offset="0%" stop-color="#ffffff" stop-opacity="0.35"/>
+    <stop offset="60%" stop-color="#ffffff" stop-opacity="0"/>
+  </linearGradient>
+</defs>
+<text x="20" y="125" font-size="96" font-family="Garamond, 'EB Garamond', 'Adobe Garamond Pro', 'Times New Roman', serif" fill="#0b0f17">My STL</text>
+<polygon points="700.0,20.0 769.3,60.0 769.3,140.0 700.0,180.0 630.7,140.0 630.7,60.0" fill="url(#hexGrad)"/>
+<polygon points="700.0,20.0 769.3,60.0 769.3,140.0 700.0,180.0 630.7,140.0 630.7,60.0" fill="url(#hexHighlight)"/>
+<g stroke="#ffffff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" fill="none">
+  <line x1="700.0" y1="100.0" x2="700.0" y2="54.0"/>
+  <line x1="700.0" y1="100.0" x2="739.8" y2="77.0"/>
+  <line x1="700.0" y1="100.0" x2="739.8" y2="123.0"/>
+  <line x1="700.0" y1="100.0" x2="700.0" y2="146.0"/>
+  <line x1="700.0" y1="100.0" x2="660.2" y2="123.0"/>
+  <line x1="700.0" y1="100.0" x2="660.2" y2="77.0"/>
+  <line x1="700.0" y1="54.0" x2="739.8" y2="77.0"/>
+  <line x1="739.8" y1="77.0" x2="739.8" y2="123.0"/>
+  <line x1="739.8" y1="123.0" x2="700.0" y2="146.0"/>
+  <line x1="700.0" y1="146.0" x2="660.2" y2="123.0"/>
+  <line x1="660.2" y1="123.0" x2="660.2" y2="77.0"/>
+  <line x1="660.2" y1="77.0" x2="700.0" y2="54.0"/>
+  <line x1="700.0" y1="54.0" x2="700.0" y2="36.0"/>
+  <line x1="739.8" y1="77.0" x2="755.4" y2="68.0"/>
+  <line x1="739.8" y1="123.0" x2="755.4" y2="132.0"/>
+  <line x1="700.0" y1="146.0" x2="700.0" y2="164.0"/>
+  <line x1="660.2" y1="123.0" x2="644.6" y2="132.0"/>
+  <line x1="660.2" y1="77.0" x2="644.6" y2="68.0"/>
+  <line x1="700.0" y1="36.0" x2="755.4" y2="68.0"/>
+  <line x1="755.4" y1="68.0" x2="755.4" y2="132.0"/>
+  <line x1="755.4" y1="132.0" x2="700.0" y2="164.0"/>
+  <line x1="700.0" y1="164.0" x2="644.6" y2="132.0"/>
+  <line x1="644.6" y1="132.0" x2="644.6" y2="68.0"/>
+  <line x1="644.6" y1="68.0" x2="700.0" y2="36.0"/>
+  <line x1="700.0" y1="54.0" x2="700.0" y2="146.0"/>
+  <line x1="739.8" y1="77.0" x2="660.2" y2="123.0"/>
+  <line x1="739.8" y1="123.0" x2="660.2" y2="77.0"/>
+</g>
+<g fill="#ffffff">
+  <circle cx="700.0" cy="100.0" r="9"/>
+  <circle cx="700.0" cy="54.0" r="6.5"/>
+  <circle cx="739.8" cy="77.0" r="6.5"/>
+  <circle cx="739.8" cy="123.0" r="6.5"/>
+  <circle cx="700.0" cy="146.0" r="6.5"/>
+  <circle cx="660.2" cy="123.0" r="6.5"/>
+  <circle cx="660.2" cy="77.0" r="6.5"/>
+  <circle cx="700.0" cy="36.0" r="5"/>
+  <circle cx="755.4" cy="68.0" r="5"/>
+  <circle cx="755.4" cy="132.0" r="5"/>
+  <circle cx="700.0" cy="164.0" r="5"/>
+  <circle cx="644.6" cy="132.0" r="5"/>
+  <circle cx="644.6" cy="68.0" r="5"/>
+</g>
+</svg>

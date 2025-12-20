@@ -5,7 +5,8 @@
 [![c++](https://img.shields.io/badge/C%2B%2B-23-blue.svg)](https://isocpp.org/)
 
 <p align="center">
-  <img src="docs/branding/logo-512.png" width="140" alt="my-stl logo">
+  <img src="docs/branding/readme-light.svg#gh-light-mode-only" width="700" alt="My STL">
+  <img src="docs/branding/readme-dark.svg#gh-dark-mode-only" width="700" alt="My STL">
 </p>
 
 C++23 container library with STL-style APIs, RAII utilities, and published performance results.
