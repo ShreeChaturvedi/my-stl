@@ -4,6 +4,10 @@
 [![license](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![c++](https://img.shields.io/badge/C%2B%2B-23-blue.svg)](https://isocpp.org/)
 
+<p align="center">
+  <img src="docs/branding/logo-512.png" width="140" alt="my-stl logo">
+</p>
+
 C++23 container library with STL-style APIs, RAII utilities, and published performance results.
 
 ## Highlights
