@@ -28,7 +28,7 @@ Median ns/op (ratio = my-stl / std):
 
 | Case | my-stl (ns/op) | std (ns/op) | Ratio |
 | --- | --- | --- | --- |
-| Deque push_back+pop_front | `1.720` | `2.892` | `0.595x` |
+| Deque push_back + pop_front | `1.720` | `2.892` | `0.595x` |
 | Vector push_back (no reserve) | `1.609` | `2.516` | `0.640x` |
 | Vector push_back (reserve) | `0.463` | `0.465` | `0.996x` |
 | unordered_map emplace (reserve) | `48.886` | `41.325` | `1.183x` |
