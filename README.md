@@ -11,6 +11,10 @@ C++23 container library with STL-style APIs, RAII utilities, and published perfo
 - Header-only containers with STL-like APIs and deterministic behavior.
 - Self-hosting where it makes sense (containers built on other my-stl containers).
 - Full unit test suite and reproducible benchmarks with published results.
+- Catch2 tests wired to CTest.
+- Doxygen API docs target for headers.
+- CI on Linux/macOS/Windows via GitHub Actions.
+- clang-format tooling with a repo config.
 
 ## Containers
 
