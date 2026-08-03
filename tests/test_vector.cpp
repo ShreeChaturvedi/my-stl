@@ -2,6 +2,7 @@
 
 #include "vector/vector.hpp"
 
+#include <compare>
 #include <string>
 
 TEST_CASE("Vector: push_back/size/index") {
@@ -154,9 +155,10 @@ TEST_CASE("Vector: equality and three-way compare") {
 
   Vector<int> left{1, 2, 3};
   Vector<int> right{1, 2, 4};
-  CHECK((left <=> right) < 0);
-  CHECK((right <=> left) > 0);
-  CHECK((left <=> Vector<int>{1, 2, 3}) == 0);
-  CHECK((left <=> Vector<int>{1, 2, 3, 0}) < 0);
-  CHECK((Vector<int>{1, 2, 3, 0} <=> left) > 0);
+  // Avoid Catch decomposing ordering <=> 0 (MSVC rejects that form).
+  CHECK(std::is_lt(left <=> right));
+  CHECK(std::is_gt(right <=> left));
+  CHECK(std::is_eq(left <=> Vector<int>{1, 2, 3}));
+  CHECK(std::is_lt(left <=> Vector<int>{1, 2, 3, 0}));
+  CHECK(std::is_gt(Vector<int>{1, 2, 3, 0} <=> left));
 }
