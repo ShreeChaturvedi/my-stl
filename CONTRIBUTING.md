@@ -1,7 +1,7 @@
 # Contributing to my-stl
 
-Thanks for the interest in contributing. This repo is a learning-focused, header-only C++23 "build-your-own STL" project.
-Contributions that improve correctness, clarity, tests, and performance are welcome.
+Thanks for your interest in contributing. This repo is a learning-focused, header-only C++23 "build-your-own STL" project.
+Contributions that improve correctness, clarity, tests, or performance are welcome.
 
 ## Quick Start
 
@@ -47,7 +47,7 @@ If you change performance-sensitive code:
 
 ## Submitting Changes
 
-- Keep commits small and scoped (ideally one container at a time).
+- Keep commits small and scoped (ideally one container or topic at a time).
 - Use short, imperative commit subjects (e.g., `docs: update vector details`).
 - Do not commit build artifacts.
 
