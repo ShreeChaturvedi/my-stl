@@ -12,7 +12,8 @@ A contiguous, dynamically sized array with manual element lifetime management vi
 
 - Constructors: default, capacity, initializer list, copy, move.
 - Access: `operator[]` (unchecked), `at` (throws on OOB), `front`, `back`, `data`.
-- Modifiers: `push_back`, `emplace_back`, `insert`, `erase`, `clear`, `reserve`, `resize`.
+- Modifiers: `push_back`, `emplace_back`, `insert`, `erase`, `clear`, `reserve`, `resize`, `shrink_to_fit`.
+- Comparison: `operator==` / `operator!=` over element ranges; `operator<=>` when `T` is three-way comparable.
 
 ## Complexity
 
@@ -32,7 +33,7 @@ A contiguous, dynamically sized array with manual element lifetime management vi
 - No allocator template parameter (uses `std::allocator<T>` internally).
 - `resize` only supports default construction and requires `T` to be default constructible.
 - `front`, `back`, and `pop_back` throw on empty.
-- No `shrink_to_fit` or capacity growth tuning beyond `reserve`.
+- Capacity growth tuning is limited to `reserve` / `shrink_to_fit` (no custom growth policy).
 
 ## Example
 

@@ -170,6 +170,27 @@ template <typename T> void Vector<T>::reserve(std::size_t new_capacity) {
   capacity_ = new_capacity;
 }
 
+template <typename T> void Vector<T>::shrink_to_fit() {
+  if (capacity_ == size_)
+    return;
+
+  if (size_ == 0) {
+    deallocate();
+    return;
+  }
+
+  T* new_data = allocate(size_);
+  if constexpr (std::is_nothrow_move_constructible_v<T>) {
+    std::uninitialized_move_n(data_, size_, new_data);
+  } else {
+    std::uninitialized_copy_n(data_, size_, new_data);
+  }
+  std::destroy_n(data_, size_);
+  deallocate();
+  data_ = new_data;
+  capacity_ = size_;
+}
+
 template <typename T> void Vector<T>::resize(std::size_t new_size) {
   if (new_size < size_) {
     std::destroy_n(data_ + new_size, size_ - new_size);
