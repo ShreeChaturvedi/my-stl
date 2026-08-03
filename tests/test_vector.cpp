@@ -2,6 +2,7 @@
 
 #include "vector/vector.hpp"
 
+#include <compare>
 #include <string>
 
 TEST_CASE("Vector: push_back/size/index") {
@@ -107,4 +108,57 @@ TEST_CASE("Vector: insert/erase without assignment") {
 
 TEST_CASE("Vector: at throws") {
   CHECK_THROWS((Vector<int>{1, 2, 3}.at(99)));
+}
+
+TEST_CASE("Vector: shrink_to_fit after clear/pop") {
+  Vector<int> xs;
+  for (int i = 0; i < 32; ++i)
+    xs.push_back(i);
+  const auto grown = xs.capacity();
+  CHECK(grown >= xs.size());
+
+  xs.pop_back();
+  xs.pop_back();
+  CHECK_EQ(xs.capacity(), grown);
+  xs.shrink_to_fit();
+  CHECK_EQ(xs.capacity(), xs.size());
+  CHECK_EQ(xs.size(), 30u);
+  CHECK_EQ(xs.front(), 0);
+  CHECK_EQ(xs.back(), 29);
+
+  xs.clear();
+  CHECK(xs.empty());
+  // capacity may still be non-zero until shrink_to_fit
+  const auto after_clear_cap = xs.capacity();
+  CHECK(after_clear_cap >= xs.size());
+  xs.shrink_to_fit();
+  CHECK_EQ(xs.capacity(), 0u);
+  CHECK(xs.data() == nullptr);
+}
+
+TEST_CASE("Vector: equality and three-way compare") {
+  Vector<int> a{1, 2, 3};
+  Vector<int> b{1, 2, 3};
+  Vector<int> c{1, 2, 4};
+  Vector<int> d{1, 2};
+  Vector<int> e = a;
+
+  CHECK(a == b);
+  CHECK_FALSE(a != b);
+  CHECK(a == e);
+  CHECK(a != c);
+  CHECK(a != d);
+
+  a[1] = 9;
+  CHECK(a != b);
+  CHECK_FALSE(a == b);
+
+  Vector<int> left{1, 2, 3};
+  Vector<int> right{1, 2, 4};
+  // Avoid Catch decomposing ordering <=> 0 (MSVC rejects that form).
+  CHECK(std::is_lt(left <=> right));
+  CHECK(std::is_gt(right <=> left));
+  CHECK(std::is_eq(left <=> Vector<int>{1, 2, 3}));
+  CHECK(std::is_lt(left <=> Vector<int>{1, 2, 3, 0}));
+  CHECK(std::is_gt(Vector<int>{1, 2, 3, 0} <=> left));
 }

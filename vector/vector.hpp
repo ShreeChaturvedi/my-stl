@@ -1,5 +1,7 @@
 #pragma once
 
+#include <algorithm>
+#include <compare>
 #include <cstddef>
 #include <initializer_list>
 #include <iterator>
@@ -68,6 +70,7 @@ public:
   void clear() noexcept;
   void reserve(std::size_t capacity);
   void resize(std::size_t size);
+  void shrink_to_fit();
   std::size_t capacity() const noexcept;
   T* data() noexcept;
   const T* data() const noexcept;
@@ -89,6 +92,26 @@ private:
   std::size_t size_, capacity_;
   T* data_;
 };
+
+template <typename T> bool operator==(const Vector<T>& lhs, const Vector<T>& rhs) {
+  if (lhs.size() != rhs.size())
+    return false;
+  for (std::size_t i = 0; i < lhs.size(); ++i) {
+    if (!(lhs[i] == rhs[i]))
+      return false;
+  }
+  return true;
+}
+
+template <typename T> bool operator!=(const Vector<T>& lhs, const Vector<T>& rhs) {
+  return !(lhs == rhs);
+}
+
+template <typename T>
+auto operator<=>(const Vector<T>& lhs, const Vector<T>& rhs) {
+  return std::lexicographical_compare_three_way(lhs.begin(), lhs.end(), rhs.begin(),
+                                                rhs.end());
+}
 
 template <typename T> std::ostream& operator<<(std::ostream& os, const Vector<T>& vec) {
   os << '[';
