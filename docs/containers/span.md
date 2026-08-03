@@ -1,6 +1,6 @@
 # Span<T>
 
-A non-owning view over contiguous memory.
+A non-owning, bounds-aware view over contiguous memory.
 
 ## Highlights
 
@@ -18,7 +18,7 @@ A non-owning view over contiguous memory.
 
 ## Differences vs `std::span`
 
-- Minimal API (no extent parameter, no `first`/`last` helpers).
+- Minimal API surface (no extent parameter, no `first`/`last` helpers).
 - Supports construction from `Vector` explicitly.
 
 ## Example
