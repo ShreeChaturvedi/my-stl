@@ -5,13 +5,13 @@ A contiguous, dynamically sized array with manual element lifetime management vi
 ## Highlights
 
 - Contiguous storage and pointer-like iterators.
-- Growth factor ~1.5x with special-casing for tiny capacities.
+- Growth factor of approximately 1.5x, with special-casing for tiny capacities.
 - `emplace_back`, `insert`, `erase`, `reserve`, `resize` supported.
 
 ## API Notes
 
 - Constructors: default, capacity, initializer list, copy, move.
-- Access: `operator[]` (unchecked), `at` (throws), `front`, `back`, `data`.
+- Access: `operator[]` (unchecked), `at` (throws on OOB), `front`, `back`, `data`.
 - Modifiers: `push_back`, `emplace_back`, `insert`, `erase`, `clear`, `reserve`, `resize`.
 
 ## Complexity
