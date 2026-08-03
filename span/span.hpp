@@ -36,6 +36,9 @@ public:
   constexpr size_type size() const noexcept {
     return size_;
   }
+  constexpr size_type size_bytes() const noexcept {
+    return size_ * sizeof(element_type);
+  }
   constexpr bool empty() const noexcept {
     return size_ == 0;
   }
@@ -67,6 +70,18 @@ public:
     if (empty())
       throw std::out_of_range("Span::back on empty");
     return data_[size_ - 1];
+  }
+
+  Span first(size_type count) const {
+    if (count > size_)
+      throw std::out_of_range("Span::first count out of range");
+    return Span(data_, count);
+  }
+
+  Span last(size_type count) const {
+    if (count > size_)
+      throw std::out_of_range("Span::last count out of range");
+    return Span(data_ + (size_ - count), count);
   }
 
   Span subspan(size_type offset, size_type count = static_cast<size_type>(-1)) const {
